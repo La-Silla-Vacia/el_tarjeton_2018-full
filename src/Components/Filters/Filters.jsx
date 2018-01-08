@@ -39,7 +39,7 @@ export default class Filters extends Component {
     const { data } = this.props;
 
     // Loop through the data
-    const people = data.map((item, key) => {
+    const people = data.map(item => {
         const { nombres } = item;
 
         for (let i = 0; i < filter.length; i += 1) {
@@ -108,19 +108,6 @@ export default class Filters extends Component {
     return (
       <div className={s.root}>
         {selects}
-
-        {/*<form className={s.form}>*/}
-           {/*<input*/}
-             {/*id={`input-${s.nameInput}`}*/}
-             {/*required={true}*/}
-             {/*className={s.nameInput}*/}
-             {/*value={nameValue}*/}
-             {/*onChange={this.handleFormInput}*/}
-             {/*autoComplete={'off'}*/}
-             {/*type="text"*/}
-           {/*/>*/}
-           {/*<label className={s.label} htmlFor={`input-${s.nameInput}`}>Busca a una persona</label>*/}
-         {/*</form>*/}
       </div>
     )
   }

@@ -37,6 +37,6 @@
 
 .items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-gap: 2em;
+  grid-template-columns: repeat(auto-fit, 2em);
+  grid-gap: 0.25em;
 }

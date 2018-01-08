@@ -2,13 +2,18 @@
   align-items: center;
   transition: .4s;
   padding: 0.5em 0 0;
-  border: 1px solid map(colors, primary, base);
+  background-color: #000;
   text-align: center;
   cursor: pointer;
 }
 
 .open {
 
+}
+
+.inActive {
+  opacity: .25;
+  cursor: default;
 }
 
 .inner {

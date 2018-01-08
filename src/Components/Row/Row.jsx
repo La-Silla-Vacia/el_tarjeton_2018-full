@@ -20,34 +20,19 @@ export default class Row extends Component {
 
   render() {
     const { open } = this.state;
-    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito } = this.props;
+    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, hidden } = this.props;
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
-      <div tabIndex={0} className={cN(s.root, { [s.open]: open })} onClick={this.handleClick}>
+      <div
+        tabIndex={(hidden) ? false : undefined}
+        className={cN(
+          s.root,
+          { [s.open]: open },
+          { [s.inActive]: hidden })
+        }
+        onClick={!hidden ? this.handleClick : undefined}
+      >
         <div className={s.inner}>
-          <div className={s.photo} style={{ backgroundImage: `url('${photo}')` }} />
-          <div className={s.name}>
-            {nombres} {apellido1} {apellido2}
-          </div>
-          <div className={s.social}>
-            {(twitter) ?
-              <a href={`https://twitter.com/${twitter}`} target='_blank' rel={'noreferer'}>{twitter}</a>
-              : false}
-            {(twitter && perfilDeQuienEsQuien) ? ' - ' : false}
-            {(perfilDeQuienEsQuien) ?
-              <a href={perfilDeQuienEsQuien}>Quien es quien</a>
-              : false}
-          </div>
-          <footer className={s.footer}>
-            <div className={s.camara}>
-              <div className={s.headline}>Cámara</div>
-              {camara}
-            </div>
-            <div className={s.partido}>
-              <div className={s.headline}>Partido</div>
-              {partido}
-            </div>
-          </footer>
         </div>
         {(open) ?
           <div className={s.popup}>
@@ -60,7 +45,6 @@ export default class Row extends Component {
                   <rect
                     transform="translate(21.500000, 21.500000) rotate(135.000000) translate(-21.500000, -21.500000) "
                     x="-6" y="20" width="55" height="3" />
-
                 </svg>
               </button>
 
@@ -70,7 +54,28 @@ export default class Row extends Component {
                   {nombres} {apellido1} {apellido2}
                 </div>
               </header>
+
+              <div className={s.social}>
+                {(twitter) ?
+                  <a href={`https://twitter.com/${twitter}`} target='_blank' rel={'noreferer'}>{twitter}</a>
+                  : false}
+                {(twitter && perfilDeQuienEsQuien) ? ' - ' : false}
+                {(perfilDeQuienEsQuien) ?
+                  <a href={perfilDeQuienEsQuien}>Quien es quien</a>
+                  : false}
+              </div>
+
               <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito) }} />
+              <footer className={s.footer}>
+                <div className={s.camara}>
+                  <div className={s.headline}>Cámara</div>
+                  {camara}
+                </div>
+                <div className={s.partido}>
+                  <div className={s.headline}>Partido</div>
+                  {partido}
+                </div>
+              </footer>
             </div>
           </div>
           : false}

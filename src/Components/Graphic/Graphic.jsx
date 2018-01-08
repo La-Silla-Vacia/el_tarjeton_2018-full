@@ -21,14 +21,10 @@ export default class Graphic extends Component {
 
   getPeople() {
     // Get the data from the attribute
-    const { items, show } = this.state;
+    const { items } = this.state;
 
     // Loop through the data
-    let i = 0;
     return items.map((item, key) => {
-        i += 1;
-        if (i > show) return;
-
         // Return the element. If you click on it run the handleClick function
         return (
           <Row key={key} {...item} />
@@ -41,12 +37,15 @@ export default class Graphic extends Component {
     const { data } = this.props;
 
     const items = data.map((item) => {
+      item.hidden = false;
 
       for (let j = 0; j < filter.length; j += 1) {
         const filterItem = filter[j];
         if (!filterItem) continue;
         if (filterItem.which === null) continue;
-        if (item[filterItem.column] !== filterItem.which) return;
+        if (item[filterItem.column] !== filterItem.which) {
+          item.hidden = true;
+        }
       }
 
       const customFilters = tarjetones_2018_data.filters;
@@ -77,15 +76,7 @@ export default class Graphic extends Component {
     this.setState({ nameFilter: newName });
   };
 
-  handleShowMore = () => {
-    const { show } = this.state;
-    if (show < this.props.data.length) {
-      this.setState({ show: show + 15 });
-    }
-  };
-
   render() {
-    const { availableItems, show } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
     return (
@@ -99,10 +90,6 @@ export default class Graphic extends Component {
         <div className={s.items}>
           {people}
         </div>
-
-        {(show <= availableItems) ?
-          <button className={s.showMore} onClick={this.handleShowMore}>Mostrar más</button>
-          : false}
       </div>
     )
   }
