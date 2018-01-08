@@ -24,7 +24,7 @@ export default class Row extends Component {
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
       <div
-        tabIndex={(hidden) ? false : undefined}
+        tabIndex={(hidden) ? undefined : 0}
         className={cN(
           s.root,
           { [s.open]: open },
