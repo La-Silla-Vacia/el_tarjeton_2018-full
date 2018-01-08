@@ -11,27 +11,29 @@ export default class Filters extends Component {
     }
   }
 
-  handleFilterChange(column, a) {
+  handleFilterChange = (column, niceName, choice) => {
     const { filter } = this.state;
     const { onFilterUpdate } = this.props;
     let found = false;
+
     for (let i = 0; i < filter.length; i += 1) {
       const filterItem = filter[i];
       if (filterItem.column === column) {
         found = true;
-        filterItem.which = a;
+        filterItem.which = choice;
       }
     }
 
     if (!found) {
       filter.push({
         column: column,
-        which: a
-      })
+        columnNiceName: niceName,
+        which: choice
+      });
     }
 
     if (onFilterUpdate) onFilterUpdate(filter);
-  }
+  };
 
   isFilterWorthIt(column, value) {
     // Get the data from the attribute
@@ -91,7 +93,7 @@ export default class Filters extends Component {
           key={item.title}
           title={item.title}
           options={this.generateOptions(item.column)}
-          callback={this.handleFilterChange.bind(this, item.column)}
+          callback={this.handleFilterChange.bind(this, item.column, item.title)}
         />
       );
     });
@@ -107,7 +109,21 @@ export default class Filters extends Component {
     const selects = this.getSelects();
     return (
       <div className={s.root}>
-        {selects}
+        <div className={s.selects}>
+          {selects}
+        </div>
+
+        {this.state.filter.map(item => {
+          if (!item.which) return;
+          return (
+            <button title={`Eliminar filtro ${item.columnNiceName}`} className={s.activeFilter} key={item.column}
+                    onClick={this.handleFilterChange.bind(this, item.column, item.columnNiceName, null)}>
+              <span className={s.title}>{item.columnNiceName}</span>
+              <span>{item.which}</span>
+              <div className={s.cross} />
+            </button>
+          )
+        })}
       </div>
     )
   }

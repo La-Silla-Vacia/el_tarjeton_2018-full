@@ -14,8 +14,8 @@
 
 .arrow {
   position: absolute;
-  right: 0.5em;
-  top: 0.625em;
+  right: 1.5em;
+  top: 0.75em;
   pointer-events: none;
   transition: .4s;
   transform-origin: center;
@@ -29,21 +29,23 @@
 
 .arrowOpen {
   transform: rotate(180deg);
-  top: 0.625em;
   z-index: 11;
 }
 
 .options {
-  border-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   position: absolute;
   width: 100%;
   max-height: 25em;
   overflow: auto;
+
 }
 
 .open {
   z-index: 10;
   border: 1px solid currentColor;
+  border-top: 0;
 }
 
 .option {
@@ -60,11 +62,6 @@
   box-shadow: 0 -1px 0 currentColor;
 }
 
-.option:first-child {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .option:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -72,10 +69,19 @@
 
 .toggle {
   position: relative;
-  border: 0;
   width: 100%;
   font-weight: 700;
   text-transform: uppercase;
   padding-right: 2em;
   background-color: transparent;
+  margin-right: 1em;
+  border: 1px solid transparent;
+}
+
+.toggle.open,
+.toggle.open:focus {
+  outline: none;
+  border-color: currentColor;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }

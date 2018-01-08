@@ -36,13 +36,13 @@ export default class Select extends Component {
   };
 
   render() {
-    const { open, selected } = this.state;
+    const { open } = this.state;
     const { title, options } = this.props;
 
     return (
       <div className={s.root}>
         <div className={s.box}>
-          <button className={cN(s.toggle, s.option)} onClick={this.toggle}>
+          <button className={cN(s.toggle, s.option, { [s.open]: open })} onClick={this.toggle}>
             <div className={s.title}>{title}</div>
             <div className={cN(s.arrow, { [s.arrowOpen]: open })} />
           </button>
