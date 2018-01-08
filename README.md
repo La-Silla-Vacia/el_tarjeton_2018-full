@@ -3,7 +3,7 @@ Source files for el_tarjeton_2018
 
 ## Preview
 
-[You can find a preview of 'tarjetones_2018' here](https://la-silla-vacia.github.io/el_tarjeton_2018/)
+[You can find a preview of 'el_tarjeton_2018' here](https://la-silla-vacia.github.io/el_tarjeton_2018/)
 
 ![](https://raw.githubusercontent.com/la-silla-vacia/el_tarjeton_2018/master/screenshot.png)
 
