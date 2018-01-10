@@ -5,10 +5,14 @@
   background-color: #000;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 0.25em;
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
 }
 
 .open {
-
+  background-color: map(colors, primary, base);
 }
 
 .inActive {

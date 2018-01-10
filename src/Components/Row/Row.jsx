@@ -20,7 +20,10 @@ export default class Row extends Component {
 
   render() {
     const { open } = this.state;
-    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, hidden } = this.props;
+    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, posicionIz_der1A100, hidden } = this.props;
+    let scale = posicionIz_der1A100 ? posicionIz_der1A100 : 50;
+    scale = (typeof posicionIz_der1A100 === 'string') ? 50 : scale;
+    const grey = 255 - Math.round(scale * 2.55);
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
       <div
@@ -30,6 +33,10 @@ export default class Row extends Component {
           { [s.open]: open },
           { [s.inActive]: hidden })
         }
+        style={{
+          backgroundColor: `rgb(${grey},${grey},${grey})`
+        }}
+        title={`${nombres} ${apellido1} ${apellido2}`}
         onClick={!hidden ? this.handleClick : undefined}
       >
         <div className={s.inner}>

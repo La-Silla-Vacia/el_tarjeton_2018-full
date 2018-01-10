@@ -12,8 +12,7 @@ export default class Filters extends Component {
   }
 
   handleFilterChange = (column, niceName, choice) => {
-    const { filter } = this.state;
-    const { onFilterUpdate } = this.props;
+    const { onFilterUpdate, filter } = this.props;
     let found = false;
 
     for (let i = 0; i < filter.length; i += 1) {
@@ -37,8 +36,7 @@ export default class Filters extends Component {
 
   isFilterWorthIt(column, value) {
     // Get the data from the attribute
-    const { filter } = this.state;
-    const { data } = this.props;
+    const { data, filter } = this.props;
 
     // Loop through the data
     const people = data.map(item => {
@@ -113,8 +111,8 @@ export default class Filters extends Component {
           {selects}
         </div>
 
-        {this.state.filter.map(item => {
-          if (!item.which) return;
+        {this.props.filter.map(item => {
+          if (!item.which || !item.columnNiceName) return;
           return (
             <button title={`Eliminar filtro ${item.columnNiceName}`} className={s.activeFilter} key={item.column}
                     onClick={this.handleFilterChange.bind(this, item.column, item.columnNiceName, null)}>
