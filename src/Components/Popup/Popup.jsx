@@ -5,29 +5,59 @@ const converter = new showdown.Converter();
 import s from './Popup.css';
 
 export default class Popup extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false
+    }
+  }
+
   render() {
-    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, posicionIz_der1A100, hidden } = this.props;
+    const { open } = this.state;
+    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100, hidden } = this.props;
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
-      <div className={s.popup}>
-        <div className={s.popup__inner}>
+      <div className={s.root}>
+        <div className={s.inner}>
+          <header className={s.header}>
+            <span>{partido}</span>
+            <span>{camara}</span>
+          </header>
 
-          <button className={s.close_btn}>
-            <svg width="41px" height="41px" viewBox="0 0 41 41">
-              <rect transform="translate(21.500000, 21.500000) rotate(45.000000) translate(-21.500000, -21.500000) "
-                    x="-6" y="20" width="55" height="3" />
-              <rect
-                transform="translate(21.500000, 21.500000) rotate(135.000000) translate(-21.500000, -21.500000) "
-                x="-6" y="20" width="55" height="3" />
-            </svg>
+          <div className={s.intro}>
+            <div className={s.photo} style={{ backgroundImage: `url(${photo})` }} />
+            <div className={s.name}>
+              <h4>{nombres} {apellido1} {apellido2}</h4>
+              <div className={s.departamento}>
+                <h5>DEPARTAMENTO</h5>
+                {departamento}
+              </div>
+            </div>
+          </div>
+
+          <button className={s.button} onClick={(e) => {
+            this.setState({ open: !open })
+          }}>
+            LEER BIOGRAFÍA
           </button>
 
-          <header className={s.popup__header}>
-            <img className={s.photo} src={photo} alt='' />
-            <div className={s.name}>
-              {nombres} {apellido1} {apellido2}
+          {open ?
+            <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito) }} />
+            : undefined}
+
+          <div className={s.section}>
+            <h4>Espectro ideológico de partido</h4>
+            <div className={s.espectro}>
+              <div className={s.espectro__line} />
+              <div className={s.espectro__marker} style={{ left: `${posicionIz_der1A100}%` }} />
             </div>
-          </header>
+            <footer className={s.espectro__footer}>
+              <span>IZQUIERDA</span>
+              <span>CENTRO</span>
+              <span>DERECHA</span>
+            </footer>
+          </div>
 
           <div className={s.social}>
             {(twitter) ?
@@ -39,7 +69,6 @@ export default class Popup extends Component {
               : false}
           </div>
 
-          <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito) }} />
           <footer className={s.footer}>
             <div className={s.camara}>
               <div className={s.headline}>Cámara</div>
@@ -50,6 +79,8 @@ export default class Popup extends Component {
               {partido}
             </div>
           </footer>
+
+          <button className={s.button} onClick={this.props.close}> Cerca</button>
         </div>
       </div>
     );

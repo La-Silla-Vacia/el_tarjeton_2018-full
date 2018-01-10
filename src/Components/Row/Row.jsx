@@ -34,12 +34,12 @@ export default class Row extends Component {
           backgroundColor: `rgb(${grey},${grey},${grey})`
         }}
         title={`${nombres} ${apellido1} ${apellido2}`}
-        onClick={!hidden ? this.handleClick : undefined}
       >
-        <div className={s.inner}>
+        <div className={s.inner}
+             onClick={!hidden ? this.handleClick : undefined}>
         </div>
         {(open) ?
-          <Popup {...this.props} />
+          <Popup close={this.handleClick} {...this.props} />
           : false}
       </div>
     );
