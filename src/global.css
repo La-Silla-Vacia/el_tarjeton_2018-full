@@ -14,7 +14,8 @@
 
 @media (min-width: 1200px) {
   .article-content.col-sm-12.col-md-8 {
-    width: 85%;
+    width: 100%;
+    margin-left: 0;
   }
 }
 

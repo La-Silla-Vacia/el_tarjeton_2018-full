@@ -91,7 +91,6 @@ export default class Graphic extends Component {
 
   handleCameraChange = camara => {
     const filter = this.state.filter;
-    const { onFilterUpdate } = this.props;
     let found = false;
 
     for (let i = 0; i < filter.length; i += 1) {
@@ -118,28 +117,69 @@ export default class Graphic extends Component {
     const people = this.getPeople();
     return (
       <div className={s.root}>
-        <header className={s.buttons}>
-          <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
-                  onClick={this.handleCameraChange.bind(false, 'Cámara')}>
-            Congreso
-          </button>
-          <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })} onClick={this.handleCameraChange.bind(false, 'Senado')}>
-            Senado
-          </button>
-          <button className={cN(s.btn, { [s.btnActive]: !camara })} onClick={this.handleCameraChange.bind(false, null)}>
-            Ambos
-          </button>
-        </header>
-        <Filters
-          data={data}
-          filter={this.state.filter}
-          onFilterUpdate={this.handleFilterUpdate}
-          onNameUpdate={this.handleNameUpdate}
-        />
+        <div className={s.column}>
+          <header className={s.buttons}>
+            <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
+                    onClick={this.handleCameraChange.bind(false, 'Cámara')}>
+              Congreso
+            </button>
+            <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
+                    onClick={this.handleCameraChange.bind(false, 'Senado')}>
+              Senado
+            </button>
+            <button className={cN(s.btn, { [s.btnActive]: !camara })}
+                    onClick={this.handleCameraChange.bind(false, null)}>
+              Ambos
+            </button>
+          </header>
+          <Filters
+            data={data}
+            filter={this.state.filter}
+            onFilterUpdate={this.handleFilterUpdate}
+            onNameUpdate={this.handleNameUpdate}
+          />
 
-        <div className={s.items}>
-          {people}
+          <div className={s.items}>
+            {people}
+          </div>
         </div>
+        <aside className={s.column}>
+          <h2 className={s.title}>Aspirantes al senado</h2>
+          <div className={s.thumbs}>
+            {data.filter(({ camara }) => {
+              if (camara === 'Senado') return true;
+            }).map((item, index) => {
+              return (
+                <div key={item.nombres + String(index)} className={s.person}>
+                  <div className={s.avatar} style={{ backgroundImage: `url(${item.foto})` }} />
+                  <div>
+                    <h4>{item.nombres}</h4>
+                    <small>{item.partido}</small>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <hr />
+
+          <h2 className={s.title}>Aspirantes al congreso</h2>
+          <div className={s.thumbs}>
+            {data.filter(({ camara }) => {
+              if (camara === 'Cámara') return true;
+            }).map((item, index) => {
+              return (
+                <div key={item.nombres + String(index)} className={s.person}>
+                  <div className={s.avatar} style={{ backgroundImage: `url(${item.foto})` }} />
+                  <div>
+                    <h4>{item.nombres}</h4>
+                    <small>{item.partido}</small>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </aside>
       </div>
     )
   }

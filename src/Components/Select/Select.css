@@ -14,7 +14,7 @@
 
 .arrow {
   position: absolute;
-  right: 1.5em;
+  right: 0.5em;
   top: 0.75em;
   pointer-events: none;
   transition: .4s;
@@ -72,7 +72,7 @@
   width: 100%;
   font-weight: 700;
   text-transform: uppercase;
-  padding-right: 2em;
+  padding-right: 1em;
   background-color: transparent;
   margin-right: 1em;
   border: 1px solid transparent;

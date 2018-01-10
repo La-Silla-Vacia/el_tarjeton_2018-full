@@ -4,6 +4,23 @@
   position: relative;
   justify-content: space-around;
   padding-bottom: 2em;
+  display: flex;
+}
+
+.column {
+  padding: 0 1em;
+}
+
+aside.column {
+  width: 22em;
+  border-left: 1px solid map(colors, secondary, light);
+}
+
+.title {
+  font-size: 1.15em;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 0;
 }
 
 .extraIndent {
@@ -31,6 +48,7 @@
   border-left: 0;
   border-right: 0;
   padding: 5px 0;
+  margin-bottom: 0.5em;
 }
 
 .btn {
@@ -56,11 +74,33 @@
 }
 
 .items {
-  /*display: grid;*/
-  /*grid-template-columns: repeat(auto-fit, 2em);*/
-  /*grid-gap: 0.25em;*/
-  /*grid-auto-flow: column;*/
-  /* grid-template-rows: repeat(21, 0.5em); */
   column-count: 22;
   column-gap: 0.25em;
+}
+
+.thumbs {
+  height: 15em;
+  overflow: auto;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.person h4 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.avatar {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background-size: cover;
+  border: 1px solid map(colors, secondary, light);
+  margin-right: 0.5em;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
