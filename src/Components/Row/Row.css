@@ -8,6 +8,8 @@
   -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
   page-break-inside: avoid; /* Firefox */
   break-inside: avoid; /* IE 10+ */
+  background-size: cover;
+  background-position: center;
 }
 
 .open {
@@ -20,5 +22,50 @@
 }
 
 .inner {
-  height: 0.5em;
+  height: 1.25em;
+  opacity: .5;
+}
+
+[data-partido="Liberal"] .inner {
+  background-color: map(colors, partidos, liberal);
+}
+
+[data-partido="Conservador"] .inner {
+  background-color: map(colors, partidos, conservador);
+}
+
+[data-partido="Opción Ciudadana"] .inner {
+  background-color: map(colors, partidos, opcionCiudadana);
+}
+
+[data-partido="La U"] .inner {
+  background-color: map(colors, partidos, laU);
+}
+
+[data-partido="Alianza Verde"] .inner {
+  background-color: map(colors, partidos, alianzaVerde);
+}
+
+[data-partido="Centro Democrático"] .inner {
+  background-color: map(colors, partidos, centroDemocratico);
+}
+
+[data-partido="ASI"] .inner {
+  background-color: map(colors, partidos, asi);
+}
+
+[data-partido="Cambio Radical"] .inner {
+  background-color: map(colors, partidos, cambioRadical);
+}
+
+[data-partido="Conservador"] .inner {
+  background-color: map(colors, partidos, conservador);
+}
+
+[data-partido="Mira"] .inner {
+  background-color: map(colors, partidos, mira);
+}
+
+[data-partido="Mais"] .inner {
+  background-color: map(colors, partidos, mais);
 }

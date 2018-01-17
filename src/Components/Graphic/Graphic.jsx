@@ -4,8 +4,6 @@ import Filters from '../../../../elections_2018/shared/Components/Filters';
 import s from './Graphic.css';
 import Row from "../Row";
 
-import Sidebar from '../Sidebar';
-
 export default class Graphic extends Component {
   constructor(props) {
     super(props);
@@ -145,8 +143,6 @@ export default class Graphic extends Component {
             {people}
           </div>
         </div>
-
-        <Sidebar data={data} />
       </div>
     )
   }
