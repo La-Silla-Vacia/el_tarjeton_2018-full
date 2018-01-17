@@ -17,6 +17,8 @@ export default class Graphic extends Component {
       camara: null,
       popupItem: 0,
       popupOpen: false,
+      nameItem: 0,
+      nameOpen: false
     };
 
     this.numberOfRows = 20;
@@ -83,6 +85,8 @@ export default class Graphic extends Component {
           <Row
             key={item.id}
             {...item}
+            showName={this.handleNameShow.bind(false, index)}
+            hideName={this.handleHideName}
             onClick={this.handlePersonClick.bind(false, index)}
           />
         )
@@ -161,8 +165,16 @@ export default class Graphic extends Component {
     this.setState({ popupOpen: false });
   };
 
+  handleNameShow = index => {
+    this.setState({ nameOpen: true, nameItem: index });
+  };
+
+  handleHideName = () => {
+    this.setState({ nameOpen: false });
+  };
+
   render() {
-    const { camara, popupOpen, popupItem } = this.state;
+    const { camara, popupOpen, popupItem, nameOpen, nameItem } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
     return (
@@ -189,9 +201,24 @@ export default class Graphic extends Component {
             onNameUpdate={this.handleNameUpdate}
           />
 
-          <svg className={s.items} width={this.numberOfColumns * this.size} height={(this.numberOfRows + 1) * this.size}>
-            {people}
-          </svg>
+          <div className={s.inner}>
+            <svg className={s.items} width={this.numberOfColumns * this.size}
+                 height={(this.numberOfRows + 1) * this.size}>
+              {people}
+            </svg>
+
+            {nameOpen ?
+              <div className={s.name}
+                   style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}>
+                <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
+                <div className={s.nameBox}>
+                  <h4>{this.items[nameItem].name}</h4>
+                  <span>{this.items[nameItem].partido}</span>
+                </div>
+              </div>
+
+              : undefined}
+          </div>
 
           {popupOpen ?
             <Popup {...data[popupItem]} close={this.handleClosePopup} />
