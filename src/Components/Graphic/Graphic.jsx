@@ -53,7 +53,7 @@ export default class Graphic extends Component {
     this.numberOfRows = Math.round(items.length / this.numberOfColumns);
     this.size = 25;
     let x = 0, y = -this.size;
-    let rowIndex = 0;
+    let rowIndex = -1;
 
     // Loop through the data
     return items
@@ -178,7 +178,7 @@ export default class Graphic extends Component {
             onNameUpdate={this.handleNameUpdate}
           />
 
-          <svg className={s.items} width={this.numberOfColumns * this.size} height={this.numberOfRows * this.size}>
+          <svg className={s.items} width={this.numberOfColumns * this.size} height={(this.numberOfRows + 1) * this.size}>
             {people}
           </svg>
 

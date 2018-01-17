@@ -27,7 +27,6 @@ export default class Row extends Component {
   };
 
   render() {
-    const { open } = this.state;
     const { name, partido, foto, hidden, x, y, onClick } = this.props;
     return (
       <g
@@ -35,7 +34,7 @@ export default class Row extends Component {
         transform={`translate(${x}, ${y})`}
         style={{transitionDelay: `${this.transitionDelay}s`}}
         xlinkTitle={name}
-        onClick={onClick}
+        onClick={(hidden) ? undefined : onClick}
       >
         {(foto) ?
           <image xlinkHref={foto} x={0} y={0} height={20} width={20} />

@@ -15,10 +15,11 @@ export default class Popup extends Component {
 
   render() {
     const { open } = this.state;
-    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100 } = this.props;
+    const { name, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100 } = this.props;
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
       <div className={s.root}>
+        <div className={s.overlay} onClick={this.props.close} />
         <div className={s.inner}>
           <header className={s.header}>
             <span>{partido}</span>
@@ -28,7 +29,7 @@ export default class Popup extends Component {
           <div className={s.intro}>
             <div className={s.photo} style={{ backgroundImage: `url(${photo})` }} />
             <div className={s.name}>
-              <h4>{nombres} {apellido1} {apellido2}</h4>
+              <h4>{name}</h4>
               <div className={s.departamento}>
                 <h5>DEPARTAMENTO</h5>
                 {departamento}
