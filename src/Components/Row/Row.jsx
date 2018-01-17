@@ -10,7 +10,16 @@ export default class Row extends Component {
 
     this.state = {
       open: false
-    }
+    };
+
+    this.color = '';
+  }
+
+  componentWillMount() {
+    const { posicionIz_der1A100 } = this.props;
+    const scale = (posicionIz_der1A100 && typeof posicionIz_der1A100 !== 'string') ? posicionIz_der1A100 : 50;
+    const grey = 255 - Math.round(scale * 2.55);
+    this.color = `rgb(${grey},${grey},${grey})`;
   }
 
   handleClick = () => {
@@ -19,9 +28,7 @@ export default class Row extends Component {
 
   render() {
     const { open } = this.state;
-    const { name, partido, foto, posicionIz_der1A100, hidden } = this.props;
-    const scale = (posicionIz_der1A100 && typeof posicionIz_der1A100 !== 'string') ? posicionIz_der1A100 : 50;
-    const grey = 255 - Math.round(scale * 2.55);
+    const { name, partido, foto, hidden } = this.props;
     return (
       <div
         tabIndex={(hidden) ? undefined : 0}
@@ -31,7 +38,7 @@ export default class Row extends Component {
           { [s.inActive]: hidden })
         }
         style={{
-          backgroundColor: `rgb(${grey},${grey},${grey})`,
+          backgroundColor: this.color,
           backgroundImage: `url(${foto})`
         }}
         title={name}
