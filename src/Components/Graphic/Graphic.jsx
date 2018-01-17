@@ -18,7 +18,8 @@ export default class Graphic extends Component {
       popupItem: 0,
       popupOpen: false,
       nameItem: 0,
-      nameOpen: false
+      nameOpen: false,
+      nameMounted: false
     };
 
     this.numberOfRows = 20;
@@ -167,14 +168,20 @@ export default class Graphic extends Component {
 
   handleNameShow = index => {
     this.setState({ nameOpen: true, nameItem: index });
+    setTimeout(() => {
+      this.setState({ nameMounted: true })
+    }, 30)
   };
 
   handleHideName = () => {
-    this.setState({ nameOpen: false });
+    this.setState({ nameMounted: false });
+    setTimeout(() => {
+      this.setState({ nameOpen: false });
+    }, 200)
   };
 
   render() {
-    const { camara, popupOpen, popupItem, nameOpen, nameItem } = this.state;
+    const { camara, popupOpen, popupItem, nameOpen, nameItem, nameMounted } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
     return (
@@ -208,7 +215,7 @@ export default class Graphic extends Component {
             </svg>
 
             {nameOpen ?
-              <div className={s.name}
+              <div className={cN(s.name, { [s.mounted]: nameMounted })}
                    style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}>
                 <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
                 <div className={s.nameBox}>
