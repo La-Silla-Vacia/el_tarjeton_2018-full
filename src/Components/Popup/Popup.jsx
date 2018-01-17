@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cN from 'classnames';
 import showdown from 'showdown';
 
 const converter = new showdown.Converter();
@@ -9,17 +10,40 @@ export default class Popup extends Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      mounted: false
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({mounted: true});
+    }, 30);
+
+    window.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress = ({key}) => {
+    if (key === 'Escape') this.handleClose();
+  };
+
+  handleClose = () => {
+    this.setState({mounted: false});
+    setTimeout(() => {
+      this.props.close();
+    }, 430);
+  };
+
   render() {
-    const { open } = this.state;
+    const { open, mounted } = this.state;
     const { name, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100 } = this.props;
-    const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
-      <div className={s.root}>
-        <div className={s.overlay} onClick={this.props.close} />
+      <div className={cN(s.root, {[s.mounted]: mounted})}>
+        <div className={s.overlay} onClick={this.handleClose} />
         <div className={s.inner}>
           <header className={s.header}>
             <span>{partido}</span>
@@ -27,7 +51,7 @@ export default class Popup extends Component {
           </header>
 
           <div className={s.intro}>
-            <div className={s.photo} style={{ backgroundImage: `url(${photo})` }} />
+            <div className={s.photo} style={{ backgroundImage: `url(${foto})` }} />
             <div className={s.name}>
               <h4>{name}</h4>
               <div className={s.departamento}>
@@ -69,7 +93,7 @@ export default class Popup extends Component {
             </div>
           </footer>
 
-          <button className={s.button} onClick={this.props.close}> Cerca</button>
+          <button className={s.button} onClick={this.handleClose}> Cerca</button>
         </div>
       </div>
     );
