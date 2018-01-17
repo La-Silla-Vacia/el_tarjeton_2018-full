@@ -38,7 +38,34 @@ export default class Graphic extends Component {
       if (keyA > keyB) return 1;
       return 0;
     });
+
+    this.setPositions();
+
+    window.addEventListener('resize', this.setPositions);
   }
+
+  setPositions = () => {
+    const { width } = this.props;
+    this.numberOfColumns = Math.round(width / 25);
+    this.numberOfRows = Math.round(this.items.length / this.numberOfColumns);
+    this.size = 25;
+    let x = 0, y = -this.size;
+    let rowIndex = -1;
+
+    this.items = this.items.map((item) => {
+      if (rowIndex >= this.numberOfRows) {
+        y = 0;
+        x += this.size;
+        rowIndex = 0;
+      } else {
+        y += this.size;
+        rowIndex += 1;
+      }
+      item.x = x;
+      item.y = y;
+      return item;
+    });
+  };
 
   componentDidMount() {
     this.filterItems(this.state.filter);
@@ -47,29 +74,13 @@ export default class Graphic extends Component {
   getPeople() {
     // Get the data from the attribute
     const { items } = this.state;
-    const { width } = this.props;
-
-    this.numberOfColumns = Math.round(width / 25);
-    this.numberOfRows = Math.round(items.length / this.numberOfColumns);
-    this.size = 25;
-    let x = 0, y = -this.size;
-    let rowIndex = -1;
 
     // Loop through the data
     return items
       .map((item, index) => {
-        if (rowIndex >= this.numberOfRows) {
-          y = 0;
-          x += this.size;
-          rowIndex = 0;
-        } else {
-          y += this.size;
-          rowIndex += 1;
-        }
+
         return (
           <Row
-            x={x}
-            y={y}
             key={item.id}
             {...item}
             onClick={this.handlePersonClick.bind(false, index)}
