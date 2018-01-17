@@ -11,6 +11,7 @@
 }
 
 .inner {
+  width: 90%;
   max-width: 26em;
   background-color: #fff;
   margin: 6em auto 4em;

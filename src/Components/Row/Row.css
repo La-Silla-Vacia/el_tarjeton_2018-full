@@ -1,15 +1,6 @@
 .root {
-  align-items: center;
-  transition: .4s;
-  background-color: #000;
-  text-align: center;
   cursor: pointer;
-  margin-bottom: 0.25em;
-  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-  page-break-inside: avoid; /* Firefox */
-  break-inside: avoid; /* IE 10+ */
-  background-size: cover;
-  background-position: center;
+  transition: opacity .2s;
 }
 
 .open {
@@ -26,46 +17,50 @@
   opacity: .5;
 }
 
-[data-partido="Liberal"] .inner {
-  background-color: map(colors, partidos, liberal);
+.color {
+  opacity: .5;
 }
 
-[data-partido="Conservador"] .inner {
-  background-color: map(colors, partidos, conservador);
+[data-partido="Liberal"] {
+  fill: map(colors, partidos, liberal);
 }
 
-[data-partido="Opción Ciudadana"] .inner {
-  background-color: map(colors, partidos, opcionCiudadana);
+[data-partido="Conservador"] {
+  fill: map(colors, partidos, conservador);
 }
 
-[data-partido="La U"] .inner {
-  background-color: map(colors, partidos, laU);
+[data-partido="Opción Ciudadana"] {
+  fill: map(colors, partidos, opcionCiudadana);
 }
 
-[data-partido="Alianza Verde"] .inner {
-  background-color: map(colors, partidos, alianzaVerde);
+[data-partido="La U"] {
+  fill: map(colors, partidos, laU);
 }
 
-[data-partido="Centro Democrático"] .inner {
-  background-color: map(colors, partidos, centroDemocratico);
+[data-partido="Alianza Verde"] {
+  fill: map(colors, partidos, alianzaVerde);
 }
 
-[data-partido="ASI"] .inner {
-  background-color: map(colors, partidos, asi);
+[data-partido="Centro Democrático"] {
+  fill: map(colors, partidos, centroDemocratico);
 }
 
-[data-partido="Cambio Radical"] .inner {
-  background-color: map(colors, partidos, cambioRadical);
+[data-partido="ASI"] {
+  fill: map(colors, partidos, asi);
 }
 
-[data-partido="Conservador"] .inner {
-  background-color: map(colors, partidos, conservador);
+[data-partido="Cambio Radical"] {
+  fill: map(colors, partidos, cambioRadical);
 }
 
-[data-partido="Mira"] .inner {
-  background-color: map(colors, partidos, mira);
+[data-partido="Conservador"] {
+  fill: map(colors, partidos, conservador);
 }
 
-[data-partido="Mais"] .inner {
-  background-color: map(colors, partidos, mais);
+[data-partido="Mira"] {
+  fill: map(colors, partidos, mira);
+}
+
+[data-partido="Mais"] {
+  fill: map(colors, partidos, mais);
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cN from 'classnames';
 import Filters from '../../../../elections_2018/shared/Components/Filters';
+import Popup from "../Popup";
 import s from './Graphic.css';
 import Row from "../Row";
 
@@ -13,8 +14,30 @@ export default class Graphic extends Component {
       show: 9,
       availableItems: 0,
       items: [],
-      camara: null
-    }
+      camara: null,
+      popupItem: 0,
+      popupOpen: false,
+    };
+
+    this.numberOfRows = 20;
+    this.numberOfColumns = 20;
+
+    this.items = [];
+  }
+
+  componentWillMount() {
+    const { data } = this.props;
+
+    this.items = data.sort(function (a, b) {
+      let keyA = a.posicionIz_der1A100 || 50,
+        keyB = b.posicionIz_der1A100 || 50;
+      // Compare the 2 dates
+      keyA = (typeof keyA === 'string' || !keyA) ? 50 : keyA;
+      keyB = (typeof keyB === 'string' || !keyB) ? 50 : keyB;
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
   }
 
   componentDidMount() {
@@ -24,32 +47,39 @@ export default class Graphic extends Component {
   getPeople() {
     // Get the data from the attribute
     const { items } = this.state;
+    const { width } = this.props;
+
+    this.numberOfColumns = Math.round(width / 25);
+    this.numberOfRows = Math.round(items.length / this.numberOfColumns);
+    this.size = 25;
+    let x = 0, y = -this.size;
+    let rowIndex = 0;
 
     // Loop through the data
     return items
-      .sort(function (a, b) {
-        let keyA = a.posicionIz_der1A100 || 50,
-          keyB = b.posicionIz_der1A100 || 50;
-        // Compare the 2 dates
-        keyA = (typeof keyA === 'string' || !keyA) ? 50 : keyA;
-        keyB = (typeof keyB === 'string' || !keyB) ? 50 : keyB;
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-      })
-      .map((item, key) => {
-          // Return the element. If you click on it run the handleClick function
-          return (
-            <Row key={key} {...item} />
-          )
+      .map((item, index) => {
+        if (rowIndex >= this.numberOfRows) {
+          y = 0;
+          x += this.size;
+          rowIndex = 0;
+        } else {
+          y += this.size;
+          rowIndex += 1;
         }
-      );
+        return (
+          <Row
+            x={x}
+            y={y}
+            key={item.id}
+            {...item}
+            onClick={this.handlePersonClick.bind(false, index)}
+          />
+        )
+      });
   }
 
   filterItems(filter) {
-    const { data } = this.props;
-
-    const items = data.map((item) => {
+    const items = this.items.map((item) => {
       item.hidden = false;
 
       for (let j = 0; j < filter.length; j += 1) {
@@ -111,8 +141,17 @@ export default class Graphic extends Component {
     this.filterItems(filter);
   };
 
+  handlePersonClick = index => {
+    if (this.state.popupOpen) return;
+    this.setState({ popupOpen: true, popupItem: index });
+  };
+
+  handleClosePopup = () => {
+    this.setState({ popupOpen: false });
+  };
+
   render() {
-    const { camara } = this.state;
+    const { camara, popupOpen, popupItem } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
     return (
@@ -139,9 +178,13 @@ export default class Graphic extends Component {
             onNameUpdate={this.handleNameUpdate}
           />
 
-          <div className={s.items}>
+          <svg className={s.items} width={this.numberOfColumns * this.size} height={this.numberOfRows * this.size}>
             {people}
-          </div>
+          </svg>
+
+          {popupOpen ?
+            <Popup {...data[popupItem]} close={this.handleClosePopup} />
+            : undefined}
         </div>
       </div>
     )

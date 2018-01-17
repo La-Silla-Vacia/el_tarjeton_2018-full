@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import cN from 'classnames';
 
 import s from './Row.css';
-import Popup from "../Popup";
 
 export default class Row extends Component {
   constructor(props) {
@@ -28,9 +27,25 @@ export default class Row extends Component {
 
   render() {
     const { open } = this.state;
-    const { name, partido, foto, hidden } = this.props;
+    const { name, partido, foto, hidden, x, y, onClick } = this.props;
     return (
-      <div
+      <g
+        className={cN(s.root, { [s.inActive]: hidden })}
+        transform={`translate(${x}, ${y})`}
+        xlinkTitle={name}
+        onClick={onClick}
+      >
+        {(foto) ?
+          <image xlinkHref={foto} x={0} y={0} height={20} width={20} />
+          : false}
+        <rect className={s.color} width={20} height={20} x={0} y={0} data-partido={partido} />
+      </g>
+    );
+  }
+}
+
+/*
+ <div
         tabIndex={(hidden) ? undefined : 0}
         className={cN(
           s.root,
@@ -51,6 +66,4 @@ export default class Row extends Component {
           <Popup close={this.handleClick} {...this.props} />
           : false}
       </div>
-    );
-  }
-}
+ */

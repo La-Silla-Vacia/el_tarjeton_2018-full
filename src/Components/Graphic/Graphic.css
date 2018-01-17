@@ -45,6 +45,7 @@ aside.column {
 }
 
 .btn {
+  background-color: #fff;
   border: 1px solid map(colors, secondary, light);
   border-left-width: 0;
   border-radius: 0;
@@ -64,9 +65,4 @@ aside.column {
 
 .btnActive {
   background-color: map(colors, neutral, lightest);
-}
-
-.items {
-  column-count: 50;
-  column-gap: 0.25em;
 }

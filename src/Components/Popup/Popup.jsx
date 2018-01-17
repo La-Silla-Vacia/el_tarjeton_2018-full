@@ -15,7 +15,7 @@ export default class Popup extends Component {
 
   render() {
     const { open } = this.state;
-    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100, hidden } = this.props;
+    const { nombres, apellido1, apellido2, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100 } = this.props;
     const photo = (foto) ? foto : 'http://archivo.lasillavacia.com/archivos/historias/odebrecht/15.jpg';
     return (
       <div className={s.root}>
@@ -59,23 +59,11 @@ export default class Popup extends Component {
             </footer>
           </div>
 
-          <div className={s.social}>
-            {(twitter) ?
-              <a href={`https://twitter.com/${twitter}`} target='_blank' rel={'noreferer'}>{twitter}</a>
-              : false}
-            {(twitter && perfilDeQuienEsQuien) ? ' - ' : false}
-            {(perfilDeQuienEsQuien) ?
-              <a href={perfilDeQuienEsQuien}>Quien es quien</a>
-              : false}
-          </div>
-
           <footer className={s.footer}>
             <div className={s.camara}>
-              <div className={s.headline}>Cámara</div>
               {camara}
             </div>
             <div className={s.partido}>
-              <div className={s.headline}>Partido</div>
               {partido}
             </div>
           </footer>
