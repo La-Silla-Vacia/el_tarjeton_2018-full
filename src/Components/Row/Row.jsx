@@ -19,7 +19,7 @@ export default class Row extends Component {
 
   render() {
     const { open } = this.state;
-    const { nombres, apellido1, apellido2, posicionIz_der1A100, hidden } = this.props;
+    const { nombres, apellido1, apellido2, foto, posicionIz_der1A100, hidden } = this.props;
     const scale = (posicionIz_der1A100 && typeof posicionIz_der1A100 !== 'string') ? posicionIz_der1A100 : 50;
     const grey = 255 - Math.round(scale * 2.55);
     return (
@@ -31,7 +31,8 @@ export default class Row extends Component {
           { [s.inActive]: hidden })
         }
         style={{
-          backgroundColor: `rgb(${grey},${grey},${grey})`
+          backgroundColor: `rgb(${grey},${grey},${grey})`,
+          backgroundImage: `url(${foto})`
         }}
         title={`${nombres} ${apellido1} ${apellido2}`}
       >

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import cN from 'classnames';
-import Filters from '../Filters';
+import Filters from '../../../../elections_2018/shared/Components/Filters';
 import s from './Graphic.css';
 import Row from "../Row";
+
+import Sidebar from '../Sidebar';
 
 export default class Graphic extends Component {
   constructor(props) {
@@ -143,43 +145,8 @@ export default class Graphic extends Component {
             {people}
           </div>
         </div>
-        <aside className={s.column}>
-          <h2 className={s.title}>Aspirantes al senado</h2>
-          <div className={s.thumbs}>
-            {data.filter(({ camara }) => {
-              if (camara === 'Senado') return true;
-            }).map((item, index) => {
-              return (
-                <div key={item.nombres + String(index)} className={s.person}>
-                  <div className={s.avatar} style={{ backgroundImage: `url(${item.foto})` }} />
-                  <div>
-                    <h4>{item.nombres}</h4>
-                    <small>{item.partido}</small>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
 
-          <hr />
-
-          <h2 className={s.title}>Aspirantes al congreso</h2>
-          <div className={s.thumbs}>
-            {data.filter(({ camara }) => {
-              if (camara === 'Cámara') return true;
-            }).map((item, index) => {
-              return (
-                <div key={item.nombres + String(index)} className={s.person}>
-                  <div className={s.avatar} style={{ backgroundImage: `url(${item.foto})` }} />
-                  <div>
-                    <h4>{item.nombres}</h4>
-                    <small>{item.partido}</small>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </aside>
+        <Sidebar data={data} />
       </div>
     )
   }
