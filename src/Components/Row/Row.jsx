@@ -12,6 +12,7 @@ export default class Row extends Component {
     };
 
     this.color = '';
+    this.transitionDelay = Math.random() / 4;
   }
 
   componentWillMount() {
@@ -32,6 +33,7 @@ export default class Row extends Component {
       <g
         className={cN(s.root, { [s.inActive]: hidden })}
         transform={`translate(${x}, ${y})`}
+        style={{transitionDelay: `${this.transitionDelay}s`}}
         xlinkTitle={name}
         onClick={onClick}
       >
@@ -43,27 +45,3 @@ export default class Row extends Component {
     );
   }
 }
-
-/*
- <div
-        tabIndex={(hidden) ? undefined : 0}
-        className={cN(
-          s.root,
-          { [s.open]: open },
-          { [s.inActive]: hidden })
-        }
-        style={{
-          backgroundColor: this.color,
-          backgroundImage: `url(${foto})`
-        }}
-        title={name}
-        data-partido={partido}
-      >
-        <div className={s.inner}
-             onClick={!hidden ? this.handleClick : undefined}>
-        </div>
-        {(open) ?
-          <Popup close={this.handleClick} {...this.props} />
-          : false}
-      </div>
- */
