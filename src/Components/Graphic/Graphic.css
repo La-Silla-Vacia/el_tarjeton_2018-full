@@ -74,6 +74,7 @@
   opacity: 0;
   transition: .200s;
   pointer-events: none;
+  min-width: 15em;
 }
 
 .mounted {
@@ -113,4 +114,59 @@
 
 .name span {
   font-size: 13px;
+}
+
+.izqDer {
+  width: 100%;
+  margin: 1.5em 0;
+  position: relative;
+}
+
+.izqDer::after {
+  left: 50%;
+}
+
+.izqDerInner {
+  width: 100%;
+  height: 1px;
+  background-color: #a8a8a8;
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.izqDerInner::before,
+.izqDerInner::after,
+.izqDer::after {
+  content: '';
+  height: 1.5em;
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  width: 1px;
+  background-color: #a8a8a8;
+}
+
+.izqDerInner::before {
+  left: 0;
+}
+
+.izqDerInner::after {
+  right: 0;
+}
+
+.izqDer__text {
+  text-transform: uppercase;
+  color: #a8a8a8;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.izqDer__text span:first-child {
+  text-align: left;
+}
+
+.izqDer__text span:last-child {
+  text-align: right;
 }

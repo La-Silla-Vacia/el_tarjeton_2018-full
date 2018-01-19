@@ -230,6 +230,15 @@ export default class Graphic extends Component {
           {popupOpen ?
             <Popup {...data[popupItem]} close={this.handleClosePopup} />
             : undefined}
+
+            <div className={s.izqDer}>
+              <div className={s.izqDerInner} />
+              <div className={s.izqDer__text}>
+                <span>Izq</span>
+                <span>Centro</span>
+                <span>Derecha</span>
+              </div>
+            </div>
         </div>
       </div>
     )

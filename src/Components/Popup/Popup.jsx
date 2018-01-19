@@ -94,7 +94,7 @@ export default class Popup extends Component {
                 </div>
                 <div style={{ textAlign: 'right' }}>
                   <span>VOTOS</span><br />
-                  {votosMasRecientes}
+                  {votosMasRecientes || 'Sin definir'}
                 </div>
               </div>
               : <em>Sin previo votación</em>}
