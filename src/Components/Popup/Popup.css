@@ -140,6 +140,10 @@
   margin: 0;
 }
 
+.section__blank {
+  background-color: transparent;
+}
+
 .espectro {
   width: 100%;
   position: relative;
@@ -195,7 +199,6 @@
 .espectro__footer span:nth-child(2) {
   text-align: center;
 }
-
 
 .espectro__footer span:last-child {
   text-align: right;

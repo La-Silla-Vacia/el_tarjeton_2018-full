@@ -3,6 +3,10 @@
   transition: opacity .2s;
 }
 
+.root rect {
+  fill: map(colors, partidos, otros);
+}
+
 .open {
   background-color: map(colors, primary, base);
 }
@@ -21,46 +25,66 @@
   opacity: .5;
 }
 
-[data-partido="Liberal"] {
-  fill: map(colors, partidos, liberal);
+.root [data-partido="Afros"] {
+  fill: map(colors, partidos, afros);
 }
 
-[data-partido="Conservador"] {
-  fill: map(colors, partidos, conservador);
-}
-
-[data-partido="Opción Ciudadana"] {
-  fill: map(colors, partidos, opcionCiudadana);
-}
-
-[data-partido="La U"] {
-  fill: map(colors, partidos, laU);
-}
-
-[data-partido="Alianza Verde"] {
-  fill: map(colors, partidos, alianzaVerde);
-}
-
-[data-partido="Centro Democrático"] {
-  fill: map(colors, partidos, centroDemocratico);
-}
-
-[data-partido="ASI"] {
+.root [data-partido="Asi"] {
   fill: map(colors, partidos, asi);
 }
 
-[data-partido="Cambio Radical"] {
+.root [data-partido="Indígenas"] {
+  fill: map(colors, partidos, indigenas);
+}
+
+.root [data-partido="Farc"] {
+  fill: map(colors, partidos, farc);
+}
+
+.root [data-partido="Opción Ciudadana"] {
+  fill: map(colors, partidos, opcionCiudadana);
+}
+
+.root [data-partido="Polo"], [data-partido="Polo Democrático Alternativo"] {
+  fill: map(colors, partidos, polo);
+}
+
+.root [data-partido="Coalición Colombia"] {
+  fill: map(colors, partidos, coalicionColombia);
+}
+
+.root [data-partido="Alianza Verde"] {
+  fill: map(colors, partidos, alianzaVerde);
+}
+
+.root [data-partido="Lista De La Decencia"] {
+  fill: map(colors, partidos, listaDeLaDecencia);
+}
+
+.root [data-partido="Liberal"] {
+  fill: map(colors, partidos, liberal);
+}
+
+.root [data-partido="La U"] {
+  fill: map(colors, partidos, laU);
+}
+
+.root [data-partido="Cambio Radical"] {
   fill: map(colors, partidos, cambioRadical);
 }
 
-[data-partido="Conservador"] {
-  fill: map(colors, partidos, conservador);
-}
-
-[data-partido="Mira"] {
+.root [data-partido="Mira"] {
   fill: map(colors, partidos, mira);
 }
 
-[data-partido="Mais"] {
+.root [data-partido="Conservador"] {
+  fill: map(colors, partidos, conservador);
+}
+
+.root [data-partido="Centro Democrático"] {
+  fill: map(colors, partidos, centroDemocratico);
+}
+
+.root [data-partido="Mais"] {
   fill: map(colors, partidos, mais);
 }

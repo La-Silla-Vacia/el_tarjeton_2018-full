@@ -17,7 +17,7 @@ export default class Popup extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({mounted: true});
+      this.setState({ mounted: true });
     }, 30);
 
     window.addEventListener('keydown', this.handleKeyPress);
@@ -27,12 +27,12 @@ export default class Popup extends Component {
     window.removeEventListener('keydown', this.handleKeyPress);
   }
 
-  handleKeyPress = ({key}) => {
+  handleKeyPress = ({ key }) => {
     if (key === 'Escape') this.handleClose();
   };
 
   handleClose = () => {
-    this.setState({mounted: false});
+    this.setState({ mounted: false });
     setTimeout(() => {
       this.props.close();
     }, 430);
@@ -40,9 +40,9 @@ export default class Popup extends Component {
 
   render() {
     const { open, mounted } = this.state;
-    const { name, camara, partido, foto, twitter, perfilDeQuienEsQuien, perfilito, departamento, posicionIz_der1A100 } = this.props;
+    const { name, camara, partido, foto, votosMasRecientes, twitter, perfilDeQuienEsQuien, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100 } = this.props;
     return (
-      <div className={cN(s.root, {[s.mounted]: mounted})}>
+      <div className={cN(s.root, { [s.mounted]: mounted })}>
         <div className={s.overlay} onClick={this.handleClose} />
         <div className={s.inner}>
           <header className={s.header}>
@@ -68,7 +68,7 @@ export default class Popup extends Component {
           </button>
 
           {open ?
-            <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito) }} />
+            <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito || '*No biografía*' ) }} />
             : undefined}
 
           <div className={s.section}>
@@ -84,13 +84,20 @@ export default class Popup extends Component {
             </footer>
           </div>
 
-          <footer className={s.footer}>
-            <div className={s.camara}>
-              {camara}
-            </div>
-            <div className={s.partido}>
-              {partido}
-            </div>
+          <footer className={cN(s.section, s.section__blank)}>
+            <h4>Última Votación</h4>
+            {enQueEleccionSacoLosVotosMasRecientes ?
+              <div className={s.espectro__footer} style={{ gridTemplateColumns: '1fr 1fr' }}>
+                <div>
+                  <span>TK / AÑO</span><br />
+                  {enQueEleccionSacoLosVotosMasRecientes}
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span>VOTOS</span><br />
+                  {votosMasRecientes}
+                </div>
+              </div>
+              : <em>Sin previo votación</em>}
           </footer>
 
           <button className={s.button} onClick={this.handleClose}> Cerca</button>
