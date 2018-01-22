@@ -28,6 +28,8 @@ export default class Graphic extends Component {
     this.items = [];
   }
 
+  partidos = ['Afros', 'Indígenas', 'Farc', 'Opción Ciudadana', 'Polo', 'Coalición Colombia', 'Alianza Verde', 'Lista De La Decencia', 'Liberal', 'La U', 'Cambio Radical', 'Mira', 'Conservador', 'Centro Democrático', 'Otros'];
+
   componentWillMount() {
     const { data } = this.props;
 
@@ -186,59 +188,69 @@ export default class Graphic extends Component {
     const people = this.getPeople();
     return (
       <div className={s.root}>
-        <div className={s.column}>
-          <header className={s.buttons}>
-            <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
-                    onClick={this.handleCameraChange.bind(false, 'Cámara')}>
-              Congreso
-            </button>
-            <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
-                    onClick={this.handleCameraChange.bind(false, 'Senado')}>
-              Senado
-            </button>
-            <button className={cN(s.btn, { [s.btnActive]: !camara })}
-                    onClick={this.handleCameraChange.bind(false, null)}>
-              Ambos
-            </button>
-          </header>
-          <Filters
-            data={data}
-            filter={this.state.filter}
-            onFilterUpdate={this.handleFilterUpdate}
-            onNameUpdate={this.handleNameUpdate}
-          />
+        <header className={s.buttons}>
+          <button className={cN(s.btn, { [s.btnActive]: !camara })}
+                  onClick={this.handleCameraChange.bind(false, null)}>
+            Congreso
+          </button>
+          <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
+                  onClick={this.handleCameraChange.bind(false, 'Cámara')}>
+            Cámara
+          </button>
+          <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
+                  onClick={this.handleCameraChange.bind(false, 'Senado')}>
+            Senado
+          </button>
+        </header>
+        <Filters
+          data={data}
+          filter={this.state.filter}
+          onFilterUpdate={this.handleFilterUpdate}
+          onNameUpdate={this.handleNameUpdate}
+        />
 
-          <div className={s.inner}>
-            <svg className={s.items} width={this.numberOfColumns * this.size}
-                 height={(this.numberOfRows + 1) * this.size}>
-              {people}
-            </svg>
+        <div className={s.inner}>
+          <svg className={s.items} width={this.numberOfColumns * this.size}
+               height={(this.numberOfRows + 1) * this.size}>
+            {people}
+          </svg>
 
-            {nameOpen ?
-              <div className={cN(s.name, { [s.mounted]: nameMounted })}
-                   style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}>
-                <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
-                <div className={s.nameBox}>
-                  <h4>{this.items[nameItem].name}</h4>
-                  <span>{this.items[nameItem].partido}</span>
-                </div>
+          {nameOpen ?
+            <div className={cN(s.name, { [s.mounted]: nameMounted })}
+                 style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}>
+              <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
+              <div className={s.nameBox}>
+                <h4>{this.items[nameItem].name}</h4>
+                <span>{this.items[nameItem].partido}</span>
               </div>
-
-              : undefined}
-          </div>
-
-          {popupOpen ?
-            <Popup {...data[popupItem]} close={this.handleClosePopup} />
-            : undefined}
-
-          <div className={s.izqDer} style={{ width: `${(this.numberOfColumns - 1) * this.size}px` }}>
-            <div className={s.izqDerInner} />
-            <div className={s.izqDer__text}>
-              <span>Izq</span>
-              {/*<span>Centro</span>*/}
-              <span>Derecha</span>
             </div>
+
+            : undefined}
+        </div>
+
+        {popupOpen ?
+          <Popup {...data[popupItem]} close={this.handleClosePopup} />
+          : undefined}
+
+        <div className={s.izqDer} style={{ width: `${(this.numberOfColumns - 1) * this.size}px` }}>
+          <div className={s.izqDerInner} />
+          <div className={s.izqDer__text}>
+            <span>Izq</span>
+            <span>Derecha</span>
           </div>
+        </div>
+
+        <div className={s.legenda}>
+          <ul className={s.list}>
+            {this.partidos.map((partido) => {
+              return (
+                <li className={s.item}>
+                  <div className={s.circle} data-partido={partido} />
+                  {partido}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     )

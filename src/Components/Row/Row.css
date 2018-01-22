@@ -3,10 +3,6 @@
   transition: opacity .2s;
 }
 
-.root rect {
-  fill: map(colors, partidos, otros);
-}
-
 .open {
   background-color: map(colors, primary, base);
 }
@@ -25,66 +21,91 @@
   opacity: .5;
 }
 
-.root [data-partido="Afros"] {
+rect {
+  fill: map(colors, partidos, otros);
+}
+
+[data-partido="Otros"] {
+  fill: map(colors, partidos, otros);
+  background-color: map(colors, partidos, otros);
+}
+
+[data-partido="Afros"] {
   fill: map(colors, partidos, afros);
+  background-color: map(colors, partidos, afros);
 }
 
-.root [data-partido="Asi"] {
+[data-partido="Asi"] {
   fill: map(colors, partidos, asi);
+  background-color: map(colors, partidos, asi);
 }
 
-.root [data-partido="Indígenas"] {
-  fill: map(colors, partidos, indigenas);
+[data-partido="Indígenas"] {
+  fill: map(colors, partidos, indígenas);
+  background-color: map(colors, partidos, indígenas);
 }
 
-.root [data-partido="Farc"] {
+[data-partido="Farc"] {
   fill: map(colors, partidos, farc);
+  background-color: map(colors, partidos, farc);
 }
 
-.root [data-partido="Opción Ciudadana"] {
+[data-partido="Opción Ciudadana"] {
   fill: map(colors, partidos, opcionCiudadana);
+  background-color: map(colors, partidos, opcionCiudadana);
 }
 
-.root [data-partido="Polo"], [data-partido="Polo Democrático Alternativo"] {
+[data-partido="Polo"], [data-partido="Polo Democrático Alternativo"] {
   fill: map(colors, partidos, polo);
+  background-color: map(colors, partidos, polo);
 }
 
-.root [data-partido="Coalición Colombia"] {
+[data-partido="Coalición Colombia"] {
   fill: map(colors, partidos, coalicionColombia);
+  background-color: map(colors, partidos, coalicionColombia);
 }
 
-.root [data-partido="Alianza Verde"] {
+[data-partido="Alianza Verde"] {
   fill: map(colors, partidos, alianzaVerde);
+  background-color: map(colors, partidos, alianzaVerde);
 }
 
-.root [data-partido="Lista De La Decencia"] {
+[data-partido="Lista De La Decencia"] {
   fill: map(colors, partidos, listaDeLaDecencia);
+  background-color: map(colors, partidos, listaDeLaDecencia);
 }
 
-.root [data-partido="Liberal"] {
+[data-partido="Liberal"] {
   fill: map(colors, partidos, liberal);
+  background-color: map(colors, partidos, liberal);
 }
 
-.root [data-partido="La U"] {
+[data-partido="La U"] {
   fill: map(colors, partidos, laU);
+  background-color: map(colors, partidos, laU);
 }
 
-.root [data-partido="Cambio Radical"] {
+[data-partido="Cambio Radical"] {
   fill: map(colors, partidos, cambioRadical);
+  background-color: map(colors, partidos, cambioRadical);
 }
 
-.root [data-partido="Mira"] {
+[data-partido="Mira"] {
   fill: map(colors, partidos, mira);
+  background-color: map(colors, partidos, mira);
 }
 
-.root [data-partido="Conservador"] {
+[data-partido="Conservador"] {
   fill: map(colors, partidos, conservador);
+  background-color: map(colors, partidos, conservador);
 }
 
-.root [data-partido="Centro Democrático"] {
+[data-partido="Centro Democrático"] {
   fill: map(colors, partidos, centroDemocratico);
+  background-color: map(colors, partidos, centroDemocratico);
 }
 
-.root [data-partido="Mais"] {
+[data-partido="Mais"] {
   fill: map(colors, partidos, mais);
+  background-color: map(colors, partidos, mais);
 }

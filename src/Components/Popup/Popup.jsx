@@ -40,7 +40,7 @@ export default class Popup extends Component {
 
   render() {
     const { open, mounted } = this.state;
-    const { name, camara, partido, foto, votosMasRecientes, twitter, perfilDeQuienEsQuien, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100 } = this.props;
+    const { name, camara, partido, foto, votosMasRecientes, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100 } = this.props;
     return (
       <div className={cN(s.root, { [s.mounted]: mounted })}>
         <div className={s.overlay} onClick={this.handleClose} />
@@ -68,7 +68,8 @@ export default class Popup extends Component {
           </button>
 
           {open ?
-            <article className={s.content} dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito || '*No biografía*' ) }} />
+            <article className={s.content}
+                     dangerouslySetInnerHTML={{ __html: converter.makeHtml(perfilito || '*No biografía*') }} />
             : undefined}
 
           <div className={s.section}>
