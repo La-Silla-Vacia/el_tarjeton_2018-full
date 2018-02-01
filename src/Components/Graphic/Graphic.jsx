@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cN from 'classnames';
 import Filters from '../../../../elections_2018/shared/Components/Filters';
-import Popup from "../Popup";
+import Popup from "../../../../elections_2018/shared/Components/Popup";
 import s from './Graphic.css';
 import Row from "../Row";
 
@@ -137,25 +137,25 @@ export default class Graphic extends Component {
     this.setState({ nameFilter: newName });
   };
 
-  handleCameraChange = camara => {
+  handleCameraChange = (column, which) => {
     const filter = this.state.filter;
     let found = false;
 
     for (let i = 0; i < filter.length; i += 1) {
       const filterItem = filter[i];
-      if (filterItem.column === 'camara') {
+      if (filterItem.column === column) {
         found = true;
-        filterItem.which = camara;
+        filterItem.which = which;
       }
     }
 
     if (!found) {
       filter.push({
-        column: "camara",
-        which: camara
+        column: column,
+        which: which
       });
     }
-    this.setState({ camara });
+    if (column === "camara") this.setState({ camara: which });
     this.filterItems(filter);
   };
 
@@ -190,15 +190,15 @@ export default class Graphic extends Component {
       <div className={s.root}>
         <header className={s.buttons}>
           <button className={cN(s.btn, { [s.btnActive]: !camara })}
-                  onClick={this.handleCameraChange.bind(false, null)}>
+                  onClick={this.handleCameraChange.bind(false, 'camara', null)}>
             Congreso
           </button>
           <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
-                  onClick={this.handleCameraChange.bind(false, 'Cámara')}>
+                  onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
             Cámara
           </button>
           <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
-                  onClick={this.handleCameraChange.bind(false, 'Senado')}>
+                  onClick={this.handleCameraChange.bind(false, 'camara', 'Senado')}>
             Senado
           </button>
         </header>
@@ -244,7 +244,7 @@ export default class Graphic extends Component {
           <ul className={s.list}>
             {this.partidos.map((partido) => {
               return (
-                <li className={s.item}>
+                <li className={s.item} key={partido}>
                   <div className={s.circle} data-partido={partido} />
                   {partido}
                 </li>
