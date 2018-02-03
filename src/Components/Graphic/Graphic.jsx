@@ -15,8 +15,8 @@ export default class Graphic extends Component {
       availableItems: 0,
       items: [],
       camara: null,
-      popupItem: 0,
-      popupOpen: false,
+      popupItem: 10,
+      popupOpen: true,
       nameItem: 0,
       nameOpen: false,
       nameMounted: false
