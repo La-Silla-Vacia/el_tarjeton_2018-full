@@ -218,13 +218,13 @@ export default class Graphic extends Component {
                     onClick={this.handleCameraChange.bind(false, 'camara', null)}>
               Congreso
             </button>
-            <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
-                    onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
-              Cámara
-            </button>
             <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
                     onClick={this.handleCameraChange.bind(false, 'camara', 'Senado')}>
               Senado
+            </button>
+            <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
+                    onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
+              Cámara
             </button>
           </div>
         </header>
