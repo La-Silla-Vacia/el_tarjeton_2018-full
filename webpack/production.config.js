@@ -39,6 +39,10 @@ const config = {
       {
         test: /\.(csv|tsv)$/,
         loaders: ['dsv-loader']
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   },

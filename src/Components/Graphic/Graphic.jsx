@@ -52,23 +52,26 @@ export default class Graphic extends Component {
   setPositions = () => {
     const { width } = this.props;
     this.numberOfColumns = Math.round(width / 25);
-    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns  - 2));
+    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns - 2));
     this.size = 25;
     let x = 0, y = -this.size;
     let rowIndex = -1;
 
-    let prevPercentage = 0;
     let currentStage = 0;
-    this.groups = [[], [], []];
+    this.stageSizes = [];
     this.items = this.items.map((item) => {
       if ((item.posicionIz_der1A100 >= 33 && currentStage < 33) || item.posicionIz_der1A100 >= 66 && currentStage < 66) {
         y = -this.size;
-        x += this.size * 2;
+        x += this.size + (this.size / 2);
         rowIndex = -1;
         currentStage = item.posicionIz_der1A100;
+        if (item.posicionIz_der1A100 >= 33 && item.posicionIz_der1A100 < 66) {
+          this.stageSizes[0] = { start: 0, width: x, text: "IZQUIERDA" };
+        } else {
+          this.stageSizes[1] = { start: this.stageSizes[0].width, width: x - this.stageSizes[0].width, text: "CENTRO" };
+        }
       }
 
-      prevPercentage = item.posicionIz_der1A100;
       if (rowIndex >= this.numberOfRows) {
         y = 0;
         x += this.size;
@@ -80,18 +83,15 @@ export default class Graphic extends Component {
       item.x = x;
       item.y = y;
 
-
-      if (item.posicionIz_der1A100 <= 33) {
-        this.groups[0].push(item);
-      } else if (item.posicionIz_der1A100 > 33 && item.posicionIz_der1A100 <= 66) {
-        this.groups[1].push(item);
-      } else {
-        this.groups[2].push(item);
+      if (this.stageSizes[1]) {
+        this.stageSizes[2] = {
+          start: this.stageSizes[0].width + this.stageSizes[1].width,
+          width: x - this.stageSizes[0].width - this.stageSizes[1].width + (this.size + this.size / 2),
+          text: "DERECHA"
+        };
       }
-
       return item;
     });
-    // console.log(groups);
   };
 
   componentDidMount () {
@@ -255,11 +255,12 @@ export default class Graphic extends Component {
           : undefined}
 
         <div className={s.izqDer} style={{ width: `${(this.numberOfColumns - 1) * this.size}px` }}>
-          <div className={s.izqDerInner} />
-          <div className={s.izqDer__text}>
-            <span>Izq</span>
-            <span>Derecha</span>
-          </div>
+          {this.stageSizes.map((size, i) => {
+            return (
+              <div className={s.izqDer__line} key={i}
+                   style={{ width: size.width - (this.size / 2), left: size.start }}>{size.text}</div>
+            )
+          })}
         </div>
 
         <div className={s.legenda}>
