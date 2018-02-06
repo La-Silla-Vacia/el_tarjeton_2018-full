@@ -64,6 +64,7 @@
     "precss": "^1.4.0",
     "sass-loader": "6.0.3",
     "style-loader": "0.13.2",
+    "svg-inline-loader": "^0.8.0",
     "underscore-template-loader": "0.7.3",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.1"

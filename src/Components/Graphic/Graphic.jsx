@@ -6,7 +6,7 @@ import s from './Graphic.css';
 import Row from "../Row";
 
 export default class Graphic extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       filter: [],
@@ -16,7 +16,7 @@ export default class Graphic extends Component {
       items: [],
       camara: null,
       popupItem: 10,
-      popupOpen: true,
+      popupOpen: false,
       nameItem: 0,
       nameOpen: false,
       nameMounted: false
@@ -30,7 +30,7 @@ export default class Graphic extends Component {
 
   partidos = ['Afros', 'Indígenas', 'Farc', 'Opción Ciudadana', 'Polo', 'Coalición Colombia', 'Alianza Verde', 'Lista De La Decencia', 'Liberal', 'La U', 'Cambio Radical', 'Mira', 'Conservador', 'Centro Democrático', 'Otros'];
 
-  componentWillMount() {
+  componentWillMount () {
     const { data } = this.props;
 
     this.items = data.sort(function (a, b) {
@@ -52,12 +52,23 @@ export default class Graphic extends Component {
   setPositions = () => {
     const { width } = this.props;
     this.numberOfColumns = Math.round(width / 25);
-    this.numberOfRows = Math.round(this.items.length / this.numberOfColumns);
+    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns  - 2));
     this.size = 25;
     let x = 0, y = -this.size;
     let rowIndex = -1;
 
+    let prevPercentage = 0;
+    let currentStage = 0;
+    this.groups = [[], [], []];
     this.items = this.items.map((item) => {
+      if ((item.posicionIz_der1A100 >= 33 && currentStage < 33) || item.posicionIz_der1A100 >= 66 && currentStage < 66) {
+        y = -this.size;
+        x += this.size * 2;
+        rowIndex = -1;
+        currentStage = item.posicionIz_der1A100;
+      }
+
+      prevPercentage = item.posicionIz_der1A100;
       if (rowIndex >= this.numberOfRows) {
         y = 0;
         x += this.size;
@@ -68,15 +79,26 @@ export default class Graphic extends Component {
       }
       item.x = x;
       item.y = y;
+
+
+      if (item.posicionIz_der1A100 <= 33) {
+        this.groups[0].push(item);
+      } else if (item.posicionIz_der1A100 > 33 && item.posicionIz_der1A100 <= 66) {
+        this.groups[1].push(item);
+      } else {
+        this.groups[2].push(item);
+      }
+
       return item;
     });
+    // console.log(groups);
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.filterItems(this.state.filter);
   }
 
-  getPeople() {
+  getPeople () {
     // Get the data from the attribute
     const { items } = this.state;
 
@@ -96,7 +118,7 @@ export default class Graphic extends Component {
       });
   }
 
-  filterItems(filter) {
+  filterItems (filter) {
     const items = this.items.map((item) => {
       item.hidden = false;
 
@@ -182,7 +204,7 @@ export default class Graphic extends Component {
     }, 200)
   };
 
-  render() {
+  render () {
     const { camara, popupOpen, popupItem, nameOpen, nameItem, nameMounted } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
