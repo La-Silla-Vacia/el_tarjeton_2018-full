@@ -13,6 +13,8 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
   padding: 3vw;
   border-radius: 3px;
+  opacity: 0;
+  transition: .4s;
 }
 
 .grid::after {
@@ -26,6 +28,15 @@
   z-index: -1;
   clip-path: polygon(0 100%, 0 0, 100% 0, 100% 0);
   box-shadow: none;
+}
+
+.mounted,
+.mounted::after {
+  opacity: 1;
+}
+
+.mounted {
+  transform: translateY(2em);
 }
 
 .row {

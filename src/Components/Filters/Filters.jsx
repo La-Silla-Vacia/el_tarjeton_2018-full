@@ -155,18 +155,31 @@ export default class Filters extends Component {
     if (this.props.onNameUpdate) this.props.onNameUpdate(val);
   };
 
+  togglePopup = () => {
+    const currentState = this.state.open;
+    if (currentState) {
+      this.$popup.classList.remove(s.mounted);
+      setTimeout(() => {
+        this.setState({ open: !currentState })
+      }, 220)
+    } else {
+      this.setState({ open: !currentState });
+      setTimeout(() => {
+        this.$popup.classList.add(s.mounted);
+      }, 30)
+    }
+  };
+
   render () {
     const { open } = this.state;
     return (
       <div className={s.root}>
         <header>
-          FILTRAR POR: <button onClick={() => {
-          this.setState({ open: !this.state.open })
-        }} className={s.filterBtn}>Seleccionar Filtros</button>
+          FILTRAR POR: <button onClick={this.togglePopup} className={s.filterBtn}>Seleccionar Filtros</button>
         </header>
 
         {open ?
-          <div className={s.grid}>
+          <div className={s.grid} ref={el => {this.$popup = el}}>
             <div className={s.row}>
               {this.options.map((item) => {
                 return (
@@ -186,9 +199,7 @@ export default class Filters extends Component {
                 )
               })}
             </div>
-            <button onClick={() => {
-              this.setState({ open: !this.state.open })
-            }} className={cN(s.filterBtn, s.blue)}>
+            <button onClick={this.togglePopup} className={cN(s.filterBtn, s.blue)}>
               APLICAR
             </button>
           </div>
