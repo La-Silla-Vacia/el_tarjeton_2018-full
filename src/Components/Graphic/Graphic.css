@@ -47,7 +47,8 @@
   font-weight: 900;
   text-transform: uppercase;
   font-family: 'Lato', 'Roboto', sans-serif;
-  font-size: .85em;
+  font-size: 11px;
+  color: #000;
   letter-spacing: 0.01em;
 }
 
