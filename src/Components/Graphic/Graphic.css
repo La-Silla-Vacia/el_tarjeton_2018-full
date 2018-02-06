@@ -30,12 +30,11 @@
 }
 
 .buttons {
-  text-align: center;
-  border: 1px solid map(colors, secondary, light);
-  border-left: 0;
-  border-right: 0;
-  padding: 5px 0;
-  margin-bottom: 0.5em;
+  border-bottom: 1px solid map(colors, secondary, light);
+  padding: 0;
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn {
@@ -43,9 +42,12 @@
   border: 1px solid map(colors, secondary, light);
   border-left-width: 0;
   border-radius: 0;
-  padding: 0.5em;
-  font-weight: bold;
+  padding: 0.5em 1em;
+  font-weight: 900;
   text-transform: uppercase;
+  font-family: 'Lato', 'Roboto', sans-serif;
+  font-size: .85em;
+  letter-spacing: 0.01em;
 }
 
 .btn:first-child {

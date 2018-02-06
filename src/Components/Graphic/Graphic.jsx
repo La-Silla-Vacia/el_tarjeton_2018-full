@@ -52,7 +52,7 @@ export default class Graphic extends Component {
   setPositions = () => {
     const { width } = this.props;
     this.numberOfColumns = Math.round(width / 25);
-    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns - 2));
+    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns - 1));
     this.size = 25;
     let x = 0, y = -this.size;
     let rowIndex = -1;
@@ -211,18 +211,22 @@ export default class Graphic extends Component {
     return (
       <div className={s.root}>
         <header className={s.buttons}>
-          <button className={cN(s.btn, { [s.btnActive]: !camara })}
-                  onClick={this.handleCameraChange.bind(false, 'camara', null)}>
-            Congreso
-          </button>
-          <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
-                  onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
-            Cámara
-          </button>
-          <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
-                  onClick={this.handleCameraChange.bind(false, 'camara', 'Senado')}>
-            Senado
-          </button>
+          <h4 className="titulo-flujos" style={{margin: '0 0 1.5em'}}>EL TARJETÓN<br />
+            ELECTORAL</h4>
+          <div>
+            <button className={cN(s.btn, { [s.btnActive]: !camara })}
+                    onClick={this.handleCameraChange.bind(false, 'camara', null)}>
+              Congreso
+            </button>
+            <button className={cN(s.btn, { [s.btnActive]: camara === 'Cámara' })}
+                    onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
+              Cámara
+            </button>
+            <button className={cN(s.btn, { [s.btnActive]: camara === 'Senado' })}
+                    onClick={this.handleCameraChange.bind(false, 'camara', 'Senado')}>
+              Senado
+            </button>
+          </div>
         </header>
         <Filters
           data={data}
@@ -276,6 +280,6 @@ export default class Graphic extends Component {
           </ul>
         </div>
       </div>
-    )
+  )
   }
-}
+  }
