@@ -138,12 +138,18 @@
   font-size: .8em;
 }
 
+.legenda {
+  border-top: 1px solid rgba(159, 152, 154, .5);
+  padding-top: 1em;
+}
+
 .list {
   list-style: none;
   margin: 0;
   padding: 0;
   column-count: 5;
   max-width: 64em;
+  font-size: .85em;
 }
 
 .item {

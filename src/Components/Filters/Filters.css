@@ -13,8 +13,6 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, .6);
   padding: 3vw;
   border-radius: 3px;
-  column-count: 4;
-  column-gap: 1em;
 }
 
 .grid::after {
@@ -28,6 +26,11 @@
   z-index: -1;
   clip-path: polygon(0 100%, 0 0, 100% 0, 100% 0);
   box-shadow: none;
+}
+
+.row {
+  column-count: 4;
+  column-gap: 1em;
 }
 
 .item__title {
@@ -61,6 +64,7 @@
   padding: 0;
   font-size: .8em;
   text-align: left;
+  transition: .2s;
 }
 
 .button::before {
@@ -71,4 +75,19 @@
   background-color: #A5B1B7;
   display: inline-block;
   margin-right: 0.5em;
+  transition: .2s;
+}
+
+.buttonActive {
+  color: map(colors, primary, base);
+}
+
+.buttonActive::before {
+  background-color: map(colors, primary, base);
+}
+
+.blue {
+  background-color: map(colors, primary, base);
+  color: #fff;
+  float: right;
 }

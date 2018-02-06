@@ -15,8 +15,11 @@ export default class Filters extends Component {
     this.options = [];
   }
 
-  handleFilterChange = (column, niceName, choice) => {
+  handleFilterChange = (item, option) => {
     const { onFilterUpdate, filter } = this.props;
+    const column = item.column;
+    const niceName = item.title
+    const choice = option.value;
     let found = false;
 
     for (let i = 0; i < filter.length; i += 1) {
@@ -26,6 +29,16 @@ export default class Filters extends Component {
         filterItem.which = choice;
       }
     }
+
+    if (item.activeChild) {
+      for (let i = 0; i < item.options.length; i += 1) {
+        item.options[i].active = false;
+      }
+    }
+    if (choice) {
+      item.activeChild = true;
+    }
+    option.active = choice;
 
     if (!found) {
       filter.push({
@@ -137,24 +150,6 @@ export default class Filters extends Component {
     return items.clean(undefined);
   }
 
-  getSelects () {
-    const { grid } = this.props;
-    const items = tarjetones_2018_data.filters;
-    if (!items) return;
-    return this.options.map((item) => {
-
-      return (
-        <Select
-          key={item.title}
-          title={item.title}
-          options={item.options}
-          bordered={grid}
-          callback={this.handleFilterChange.bind(this, item.column, item.title)}
-        />
-      );
-    });
-  }
-
   handleFormInput = event => {
     const val = event.target.value;
     this.setState({ nameValue: val });
@@ -176,25 +171,32 @@ export default class Filters extends Component {
 
         {open ?
           <div className={s.grid}>
-            {this.options.map((item) => {
-              return (
-                <div key={item.column} className={s.item}>
-                  <h3 className={s.item__title} key={item.column}>{item.title}</h3>
-                  <ul className={s.list}>
-                    {item.options.map((option) => {
-                      return (
-                        <li key={option.label}>
-                          <button onClick={this.handleFilterChange.bind(this, item.column, item.title, option.value)}
-                                  className={s.button}>{option.label}</button>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              )
-            })}
+            <div className={s.row}>
+              {this.options.map((item) => {
+                return (
+                  <div key={item.column} className={s.item}>
+                    <h3 className={s.item__title} key={item.column}>{item.title}</h3>
+                    <ul className={s.list}>
+                      {item.options.map((option) => {
+                        return (
+                          <li key={option.label}>
+                            <button onClick={this.handleFilterChange.bind(this, item, option)}
+                                    className={cN(s.button, { [s.buttonActive]: option.active })}>{option.label}</button>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                )
+              })}
+            </div>
+            <button onClick={() => {
+              this.setState({ open: !this.state.open })
+            }} className={cN(s.filterBtn, s.blue)}>
+              APLICAR
+            </button>
           </div>
-          : false}
+          : undefined}
 
         {/*<form className={s.form}>*/}
         {/*<input*/}
