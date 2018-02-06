@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import cN from 'classnames';
-import Select from '../Select';
 import s from './Filters.css';
 
 export default class Filters extends Component {
@@ -165,9 +164,6 @@ export default class Filters extends Component {
           this.setState({ open: !this.state.open })
         }} className={s.filterBtn}>Seleccionar Filtros</button>
         </header>
-        <button className={s.searchBtn}
-                style={{ backgroundImage: `url(http://lasillavacia.com/sites/all/themes/lasillavacia/images/search.svg)` }}>
-        </button>
 
         {open ?
           <div className={s.grid}>
@@ -197,19 +193,6 @@ export default class Filters extends Component {
             </button>
           </div>
           : undefined}
-
-        {/*<form className={s.form}>*/}
-        {/*<input*/}
-        {/*id={`input-${s.nameInput}`}*/}
-        {/*required={true}*/}
-        {/*className={s.nameInput}*/}
-        {/*value={this.state.nameValue}*/}
-        {/*onChange={this.handleFormInput}*/}
-        {/*autoComplete={'off'}*/}
-        {/*type="text"*/}
-        {/*/>*/}
-        {/*<label className={s.label} htmlFor={`input-${s.nameInput}`}>Busca a una persona</label>*/}
-        {/*</form>*/}
       </div>
     )
   }
