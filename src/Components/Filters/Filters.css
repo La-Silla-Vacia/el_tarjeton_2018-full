@@ -44,6 +44,30 @@
   column-gap: 1em;
 }
 
+@media only screen and (max-width: 992px) {
+  .row {
+    column-count: 4;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .row {
+    column-count: 3;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .row {
+    column-count: 2;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .row {
+    column-count: 1;
+  }
+}
+
 .item__title {
   font-family: 'Roboto Condensed', 'Roboto', sans-serif;
   color: #A5B1B7;
