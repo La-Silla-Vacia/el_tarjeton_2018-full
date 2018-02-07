@@ -99,7 +99,7 @@ export default class Popup extends Component {
           </div>
 
           <div className={s.section}>
-            <h4>Como vota en</h4>
+            <h4>Como votó en</h4>
             <table className={s.listRows}>
               <thead>
               <tr>

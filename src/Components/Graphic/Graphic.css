@@ -166,6 +166,9 @@
   display: flex;
   align-items: center;
   font-family: 'roboto condensed', 'roboto', sans-serif;
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
 }
 
 .circle {
