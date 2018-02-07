@@ -179,7 +179,13 @@ export default class Filters extends Component {
         </header>
 
         {open ?
-          <div className={s.grid} ref={el => {this.$popup = el}}>
+          <div onClick={this.togglePopup} className={s.overlay} />
+          : undefined}
+
+        {open ?
+          <div className={s.grid} ref={el => {
+            this.$popup = el
+          }}>
             <div className={s.row}>
               {this.options.map((item) => {
                 return (
