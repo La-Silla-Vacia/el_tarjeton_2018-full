@@ -133,7 +133,7 @@ export default class Popup extends Component {
             <h4>Proyectos bandera</h4>
             {!banderas.filter((item) => {
               if (item) return true;
-            }).length ? <div dangerouslySetInnerHTML={{ __html: '<em>No hay proyectos bandera</em>' }} /> : undefined}
+            }).length ? <div dangerouslySetInnerHTML={{ __html: '<em>No tiene banderas claras</em>' }} /> : undefined}
             <ul className={cN(s.list, s.list__blocks)}>
               {banderas.map((bandera) => {
                 <li key={bandera}>{bandera}</li>
