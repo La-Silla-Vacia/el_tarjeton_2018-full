@@ -283,6 +283,10 @@ export default class Graphic extends Component {
               );
             })}
           </ul>
+          <div className={s.credits}>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
+            <div>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una posición institucional</div>
+          </div>
         </div>
       </div>
   )

@@ -145,11 +145,14 @@
 .legenda {
   border-top: 1px solid rgba(159, 152, 154, .5);
   padding-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .list {
   list-style: none;
-  margin: 0;
+  margin: 0 0 1em;
   padding: 0;
   column-count: 5;
   max-width: 64em;
@@ -178,4 +181,21 @@
   /*background-color: map(colors, partidos, otros);*/
   display: inline-block;
   margin-right: 0.75em;
+}
+
+.credits {
+  width: 24em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.credits img {
+  width: 40%;
+}
+
+.credits div {
+  width: 55%;
+  font-size: 12px;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
 }
