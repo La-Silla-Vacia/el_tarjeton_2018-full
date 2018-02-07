@@ -365,6 +365,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 0.5em;
   font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 .espectro__footer > span {

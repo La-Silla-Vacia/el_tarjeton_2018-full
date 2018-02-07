@@ -146,11 +146,11 @@ export default class Popup extends Component {
             {enQueEleccionSacoLosVotosMasRecientes && (enQueEleccionSacoLosVotosMasRecientes !== 'No aplica') ?
               <div className={s.espectro__footer}>
                 <div className={s.espectro__footer__item}>
-                  {enQueEleccionSacoLosVotosMasRecientes.substring(0, enQueEleccionSacoLosVotosMasRecientes.lastIndexOf(" ") + 1)}<br />
-                </div>
-                <div className={s.espectro__footer__item}>
                   {enQueEleccionSacoLosVotosMasRecientes.substring(enQueEleccionSacoLosVotosMasRecientes.lastIndexOf(" ") + 1, enQueEleccionSacoLosVotosMasRecientes.length)}<br />
                   <span>AÑO</span>
+                </div>
+                <div className={s.espectro__footer__item}>
+                  {enQueEleccionSacoLosVotosMasRecientes.substring(0, enQueEleccionSacoLosVotosMasRecientes.lastIndexOf(" ") + 1)}<br />
                 </div>
                 <div className={s.espectro__footer__item}>
                   {votosMasRecientes || 'Sin definir'}<br />
