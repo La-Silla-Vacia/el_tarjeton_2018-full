@@ -220,7 +220,7 @@ export default class Filters extends Component {
               APLICAR
             </button>
             <button onClick={this.cleanFilters} className={cN(s.filterBtn, s.blue, s.light)}>
-              limpiar filtros
+              LIMPIAR FILTROS
             </button>
           </div>
           : undefined}
