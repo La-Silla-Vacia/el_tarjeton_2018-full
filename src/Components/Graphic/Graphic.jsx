@@ -204,6 +204,10 @@ export default class Graphic extends Component {
     }, 200)
   };
 
+  handleReset = () => {
+    this.filterItems([]);
+  };
+
   render () {
     const { camara, popupOpen, popupItem, nameOpen, nameItem, nameMounted } = this.state;
     const { data } = this.props;
@@ -233,6 +237,7 @@ export default class Graphic extends Component {
           filter={this.state.filter}
           onFilterUpdate={this.handleFilterUpdate}
           onNameUpdate={this.handleNameUpdate}
+          onReset={this.handleReset}
         />
 
         <div className={s.inner}>

@@ -170,6 +170,17 @@ export default class Filters extends Component {
     }
   };
 
+  cleanFilters = () => {
+    this.setState({ filter: [] });
+    this.options = this.options.map((category) => {
+     category.options.map((option) => {
+        option.active = false;
+      });
+      return category;
+    });
+    if (this.props.onReset) this.props.onReset();
+  };
+
   render () {
     const { open } = this.state;
     return (
@@ -207,6 +218,9 @@ export default class Filters extends Component {
             </div>
             <button onClick={this.togglePopup} className={cN(s.filterBtn, s.blue)}>
               APLICAR
+            </button>
+            <button onClick={this.cleanFilters} className={cN(s.filterBtn, s.blue, s.light)}>
+              limpiar filtros
             </button>
           </div>
           : undefined}
