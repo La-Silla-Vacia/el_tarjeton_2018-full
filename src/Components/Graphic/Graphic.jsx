@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cN from 'classnames';
 import Filters from '../Filters';
-import Popup from "../../../../elections_2018/shared/Components/Popup";
+import Popup from "../Popup";
 import s from './Graphic.css';
 import Row from "../Row";
 
