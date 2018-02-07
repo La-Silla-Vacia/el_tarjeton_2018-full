@@ -174,7 +174,7 @@ export default class Filters extends Component {
     const { open } = this.state;
     return (
       <div className={s.root}>
-        <header>
+        <header className={s.header}>
           FILTRAR POR: <button onClick={this.togglePopup} className={s.filterBtn}>Seleccionar Filtros</button>
         </header>
 

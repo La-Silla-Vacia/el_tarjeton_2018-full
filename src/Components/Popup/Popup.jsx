@@ -113,7 +113,7 @@ export default class Popup extends Component {
                 return (
                   <tr key={i}>
                     <td width={500}>{pos.title}</td>
-                    {(pos.value.trim() !== 'Sí' && pos.value.trim() !== 'No') ?
+                    {(pos.value !== 'Sí' && pos.value !== 'No') ?
                       <td colSpan={2}><span className={s.error}>{pos.value}</span></td>
                       : <React.Fragment>
                         <td className={cN(s.like, { [s.chosen]: pos.value === 'Sí' })}

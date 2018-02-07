@@ -43,7 +43,7 @@
   border: 1px solid map(colors, secondary, light);
   border-left-width: 0;
   border-radius: 0;
-  padding: 0.5em 1em;
+  padding: 0.8em 2em;
   font-weight: 900;
   text-transform: uppercase;
   font-family: 'Lato', 'Roboto', sans-serif;
