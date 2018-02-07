@@ -161,8 +161,9 @@ export default class Popup extends Component {
           </footer>
 
           <button className={s.buttonClose} onClick={this.handleClose}>
-            <span />
-            <span />
+            <svg viewBox="0 0 40 40">
+              <path className={s.closeX} d="M 10,10 L 30,30 M 30,10 L 10,30" />
+            </svg>
           </button>
         </div>
       </div>

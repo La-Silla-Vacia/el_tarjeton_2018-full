@@ -420,20 +420,12 @@
   border: 0;
   width: 1.25em;
   height: 1.25em;
+  padding: 0;
 }
 
-.buttonClose span {
-  width: 1.35em;
-  height: 1px;
-  background-color: #333;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: left;
-}
-
-.buttonClose span:last-child {
-  transform: rotate(-45deg);
-  transform-origin: right;
+.closeX {
+  stroke: black;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-width: 5;
 }
