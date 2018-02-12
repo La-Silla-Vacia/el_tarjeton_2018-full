@@ -46,12 +46,10 @@ export default class Filters extends Component {
       });
     }
 
-    console.log(filter);
     if (choice) {
       item.activeChild = true;
       option.active = true;
     }
-
 
     for (let i = 0; i < this.options.length; i += 1) {
       const opt = this.options[i];
@@ -69,7 +67,7 @@ export default class Filters extends Component {
     this.setOptions();
   }
 
-  setOptions (nosave) {
+  setOptions () {
     const items = tarjetones_2018_data.filters;
     if (!items) return;
     this.options = items.map((item) => {
@@ -84,14 +82,12 @@ export default class Filters extends Component {
           };
         });
       } else {
-        options = this.generateOptions(item.column, nosave);
+        options = this.generateOptions(item.column);
       }
 
       options.sort(function (a, b) {
         return (a.label > b.label) ? 1 : ((b.label > a.label) ? -1 : 0);
       });
-
-      options.unshift({ label: "Todos", value: null, active: true });
 
       return {
         column: item.column,
@@ -134,7 +130,7 @@ export default class Filters extends Component {
     return people.clean(undefined).length;
   }
 
-  generateOptions (column, nosave) {
+  generateOptions (column) {
     const { data } = this.props;
     const array = [];
     const items = data.map((item) => {
@@ -145,7 +141,7 @@ export default class Filters extends Component {
       }
 
       let option = this.isFilterWorthIt(column, item[column]);
-      if (!nosave && !option) {
+      if (!option) {
         return;
       }
 
