@@ -18,8 +18,17 @@ export default class Filters extends Component {
     const { onFilterUpdate, filter } = this.props;
     const column = item.column;
     const niceName = item.title;
-    const choice = option.value;
+    let choice = option.value;
     let found = false;
+
+    if (option.active) {
+      choice = null;
+    }
+
+    // Make all options inactive first
+    for (let i = 0; i < item.options.length; i += 1) {
+      item.options[i].active = false;
+    }
 
     for (let i = 0; i < filter.length; i += 1) {
       const filterItem = filter[i];
@@ -29,14 +38,6 @@ export default class Filters extends Component {
       }
     }
 
-    for (let i = 0; i < item.options.length; i += 1) {
-      item.options[i].active = false;
-    }
-
-    if (choice) {
-      item.activeChild = true;
-    }
-    option.active = true;
     if (!found) {
       filter.push({
         column: column,
@@ -44,6 +45,13 @@ export default class Filters extends Component {
         which: choice
       });
     }
+
+    console.log(filter);
+    if (choice) {
+      item.activeChild = true;
+      option.active = true;
+    }
+
 
     for (let i = 0; i < this.options.length; i += 1) {
       const opt = this.options[i];
@@ -99,18 +107,6 @@ export default class Filters extends Component {
     const { data, filter } = this.props;
 
     const items = tarjetones_2018_data.filters;
-
-    // for (let i = 0; i < filter.length; i += 1) {
-    //   if (filter[i].column === column) return data.filter((item) => {
-    //     if (items) {
-    //       for (let i = 0; i < items.length; i += 1) {
-    //         if (items[i].hasOwnProperty("only")) {
-    //           if (item[items[i].column] === items[i].only) return true;
-    //         }
-    //       }
-    //     }
-    //   });
-    // }
 
     // Loop through the data
     const people = data.map((item) => {
