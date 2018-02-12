@@ -50,9 +50,9 @@ export default class Row extends Component {
         transform={`translate(${x}, ${y})`}
         style={{transitionDelay: `${this.transitionDelay}s`}}
         xlinkTitle={name}
-        onClick={(hidden) ? undefined : onClick}
-        onMouseEnter={(hidden) ? undefined : this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
+        onClick={hidden ? undefined : onClick}
+        onMouseEnter={hidden ? undefined : this.handleMouseEnter}
+        onMouseLeave={hidden ? undefined : this.handleMouseLeave}
       >
         {(foto) ?
           <image xlinkHref={`${foto}`} x={0} y={0} height={20} width={20} />

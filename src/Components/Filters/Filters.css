@@ -134,6 +134,11 @@
   background-color: map(colors, primary, base);
 }
 
+.buttonInactive {
+  opacity: .5;
+  cursor: default;
+}
+
 .blue {
   background-color: map(colors, primary, base);
   color: #fff;

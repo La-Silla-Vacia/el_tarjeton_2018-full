@@ -191,6 +191,7 @@ export default class Graphic extends Component {
   };
 
   handleNameShow = index => {
+    if (this.state.nameOpen && this.state.nameItem === index) return;
     this.setState({ nameOpen: true, nameItem: index });
     setTimeout(() => {
       this.setState({ nameMounted: true })
@@ -198,6 +199,7 @@ export default class Graphic extends Component {
   };
 
   handleHideName = () => {
+    if (!this.state.nameOpen) return;
     this.setState({ nameMounted: false });
     setTimeout(() => {
       this.setState({ nameOpen: false });
@@ -215,7 +217,7 @@ export default class Graphic extends Component {
     return (
       <div className={s.root}>
         <header className={s.buttons}>
-          <h4 className="titulo-flujos" style={{margin: '0 0 1.5em'}}>EL TARJETÓN<br />
+          <h4 className="titulo-flujos" style={{ margin: '0 0 1.5em' }}>EL TARJETÓN<br />
             ELECTORAL</h4>
           <div>
             <button className={cN(s.btn, { [s.btnActive]: !camara })}
@@ -285,10 +287,12 @@ export default class Graphic extends Component {
           </ul>
           <div className={s.credits}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
-            <div>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una posición institucional</div>
+            <div>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una
+              posición institucional
+            </div>
           </div>
         </div>
       </div>
-  )
+    )
   }
-  }
+}

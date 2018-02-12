@@ -17,7 +17,7 @@ export default class Filters extends Component {
   handleFilterChange = (item, option) => {
     const { onFilterUpdate, filter } = this.props;
     const column = item.column;
-    const niceName = item.title
+    const niceName = item.title;
     const choice = option.value;
     let found = false;
 
@@ -29,16 +29,14 @@ export default class Filters extends Component {
       }
     }
 
-    if (item.activeChild) {
-      for (let i = 0; i < item.options.length; i += 1) {
-        item.options[i].active = false;
-      }
+    for (let i = 0; i < item.options.length; i += 1) {
+      item.options[i].active = false;
     }
+
     if (choice) {
       item.activeChild = true;
     }
-    option.active = choice;
-
+    option.active = true;
     if (!found) {
       filter.push({
         column: column,
@@ -47,10 +45,23 @@ export default class Filters extends Component {
       });
     }
 
+    for (let i = 0; i < this.options.length; i += 1) {
+      const opt = this.options[i];
+      const column = opt.column;
+      for (let j = 0; j < opt.options.length; j += 1) {
+        const subOpt = opt.options[j];
+        subOpt.options = this.isFilterWorthIt(column, subOpt.value);
+      }
+    }
+
     if (onFilterUpdate) onFilterUpdate(filter);
   };
 
   componentWillMount () {
+    this.setOptions();
+  }
+
+  setOptions (nosave) {
     const items = tarjetones_2018_data.filters;
     if (!items) return;
     this.options = items.map((item) => {
@@ -65,14 +76,14 @@ export default class Filters extends Component {
           };
         });
       } else {
-        options = this.generateOptions(item.column);
+        options = this.generateOptions(item.column, nosave);
       }
 
       options.sort(function (a, b) {
         return (a.label > b.label) ? 1 : ((b.label > a.label) ? -1 : 0);
       });
 
-      options.unshift({ label: "Todos", value: null });
+      options.unshift({ label: "Todos", value: null, active: true });
 
       return {
         column: item.column,
@@ -89,17 +100,17 @@ export default class Filters extends Component {
 
     const items = tarjetones_2018_data.filters;
 
-    for (let i = 0; i < filter.length; i += 1) {
-      if (filter[i].column === column) return data.filter((item) => {
-        if (items) {
-          for (let i = 0; i < items.length; i += 1) {
-            if (items[i].hasOwnProperty("only")) {
-              if (item[items[i].column] === items[i].only) return true;
-            }
-          }
-        }
-      });
-    }
+    // for (let i = 0; i < filter.length; i += 1) {
+    //   if (filter[i].column === column) return data.filter((item) => {
+    //     if (items) {
+    //       for (let i = 0; i < items.length; i += 1) {
+    //         if (items[i].hasOwnProperty("only")) {
+    //           if (item[items[i].column] === items[i].only) return true;
+    //         }
+    //       }
+    //     }
+    //   });
+    // }
 
     // Loop through the data
     const people = data.map((item) => {
@@ -127,7 +138,7 @@ export default class Filters extends Component {
     return people.clean(undefined).length;
   }
 
-  generateOptions (column) {
+  generateOptions (column, nosave) {
     const { data } = this.props;
     const array = [];
     const items = data.map((item) => {
@@ -137,12 +148,16 @@ export default class Filters extends Component {
         if (array[i] === item[column]) return;
       }
 
-      if (!this.isFilterWorthIt(column, item[column])) return;
+      let option = this.isFilterWorthIt(column, item[column]);
+      if (!nosave && !option) {
+        return;
+      }
 
       array.push(item[column]);
       return {
         label: item[column],
-        value: item[column]
+        value: item[column],
+        options: option
       };
     });
 
@@ -173,8 +188,9 @@ export default class Filters extends Component {
   cleanFilters = () => {
     this.setState({ filter: [] });
     this.options = this.options.map((category) => {
-     category.options.map((option) => {
-        option.active = false;
+      category.options.map((option) => {
+        option.active = !option.value;
+        option.options = true;
       });
       return category;
     });
@@ -206,8 +222,16 @@ export default class Filters extends Component {
                       {item.options.map((option) => {
                         return (
                           <li key={option.label}>
-                            <button onClick={this.handleFilterChange.bind(this, item, option)}
-                                    className={cN(s.button, { [s.buttonActive]: option.active })}>{option.label}</button>
+                            <button
+                              onClick={!option.options && option.value ? undefined : this.handleFilterChange.bind(this, item, option)}
+                              className={cN(
+                                s.button,
+                                { [s.buttonActive]: option.active },
+                                { [s.buttonInactive]: !option.options && option.value }
+                              )}
+                            >
+                              {option.label}
+                            </button>
                           </li>
                         )
                       })}
