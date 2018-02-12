@@ -104,6 +104,7 @@
   border-radius: 2px;
   font-family: map(fonts, family-sans);
   font-size: 12px;
+  margin-left: 5px;
 }
 
 .button {

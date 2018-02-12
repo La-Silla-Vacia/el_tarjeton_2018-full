@@ -194,7 +194,11 @@ export default class Filters extends Component {
     return (
       <div className={s.root}>
         <header className={s.header}>
-          FILTRAR POR: <button onClick={this.togglePopup} className={s.filterBtn}>Seleccionar Filtros</button>
+          FILTRAR POR:
+          <button onClick={this.togglePopup} className={s.filterBtn}>
+            Seleccionar Filtros
+            <span className="caret" style={{marginLeft: 5}} />
+          </button>
         </header>
 
         {open ?
