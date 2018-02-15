@@ -15,6 +15,7 @@ export default class Filters extends Component {
   }
 
   handleFilterChange = (item, option) => {
+    console.log(item, option);
     const { onFilterUpdate, filter } = this.props;
     const column = item.column;
     const niceName = item.title;
@@ -194,11 +195,31 @@ export default class Filters extends Component {
     return (
       <div className={s.root}>
         <header className={s.header}>
-          FILTRAR POR:
           <button onClick={this.togglePopup} className={s.filterBtn}>
-            Seleccionar Filtros
-            <span className="caret" style={{marginLeft: 5}} />
+            FILTRAR POR:
+            <span className="caret" style={{ marginLeft: 5 }} />
           </button>
+
+          {this.options.map(item => {
+            if (!item.activeChild) return;
+            return item.options.map(option => {
+              if (!option.active) return;
+              return (
+                <div>
+                  <span className={s.title}>{item.title}</span>
+                  <button
+                    title={`Eliminar filtro ${item.columnNiceName}`}
+                    className={s.activeFilter}
+                    key={item.column}
+                    onClick={this.handleFilterChange.bind(this, item, option)}
+                  >
+                    <span>{option.label}</span>
+                    <div className={s.cross} />
+                  </button>
+                </div>
+              )
+            })
+          })}
         </header>
 
         {open ?
