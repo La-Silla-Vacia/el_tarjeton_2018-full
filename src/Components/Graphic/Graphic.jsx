@@ -118,7 +118,8 @@ export default class Graphic extends Component {
       });
   }
 
-  filterItems (filter) {
+  filterItems (filter, nameFilter) {
+    const name_filter = nameFilter || this.state.nameFilter;
     const items = this.items.map((item) => {
       item.hidden = false;
 
@@ -145,6 +146,10 @@ export default class Graphic extends Component {
           }
         }
       }
+
+      if (name_filter) {
+        if (item.name.toLowerCase().indexOf(name_filter) === -1) item.hidden = true;
+      }
       return item;
     });
 
@@ -157,6 +162,7 @@ export default class Graphic extends Component {
 
   handleNameUpdate = newName => {
     this.setState({ nameFilter: newName });
+    this.filterItems(this.state.filter, newName);
   };
 
   handleCameraChange = (column, which) => {

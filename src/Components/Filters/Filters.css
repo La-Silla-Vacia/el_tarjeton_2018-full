@@ -200,3 +200,26 @@
 .cross::after {
   transform: rotate(-45deg);
 }
+
+.search {
+  justify-self: flex-end;
+  margin-left: auto;
+  display: flex;
+}
+
+.searchButton {
+  border: 0;
+  background: transparent;
+  color: map(colors, primary, base);
+  display: inline-flex;
+}
+
+.searchSubmit {
+  border: 1px solid currentColor;
+  color: map(colors, primary, base);
+  background-color: transparent;
+}
+
+.hidden {
+  display: none;
+}
