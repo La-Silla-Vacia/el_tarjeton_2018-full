@@ -229,8 +229,6 @@ export default class Graphic extends Component {
     const people = this.getPeople();
     return (
       <div className={s.root}>
-        <header className={s.buttons}>
-        </header>
         <Filters
           data={data}
           filter={this.state.filter}
@@ -298,9 +296,14 @@ export default class Graphic extends Component {
             })}
           </ul>
           <div className={s.credits}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
-            <div>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una
-              posición institucional
+            <div>
+              <img src="http://bestiario.org/themes/default/bestiario_logo.svg" alt="Bestiario" />
+            </div>
+            <div>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
+              <p>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una
+                posición institucional
+              </p>
             </div>
           </div>
         </div>
