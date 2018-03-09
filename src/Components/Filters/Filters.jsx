@@ -159,7 +159,8 @@ export default class Filters extends Component {
 
   handleFormInput = event => {
     event.preventDefault();
-    const val = this.$input.value || null;
+    let val = this.$input.value || null;
+    if (val) val = val.toLowerCase();
     if (this.props.onNameUpdate) this.props.onNameUpdate(val);
   };
 
@@ -210,7 +211,7 @@ export default class Filters extends Component {
             return item.options.map(option => {
               if (!option.active) return;
               return (
-                <div key={item.title}>
+                <div key={item.title} style={{transform: 'translateY(-11px)'}}>
                   <span className={s.title}>{item.title}</span>
                   <button
                     title={`Eliminar filtro ${item.columnNiceName}`}

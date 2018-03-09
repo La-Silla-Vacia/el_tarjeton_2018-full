@@ -212,10 +212,10 @@
   overflow: hidden;
   display: flex;
   transition: width .3s ease;
+}
 
-  input {
-    border: 1px solid #ccc;
-  }
+.searchForm input {
+  border: 1px solid #ccc;
 }
 
 .searchButton {

@@ -11,7 +11,7 @@
 }
 
 .mounted {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(71, 92, 103, .73);
 }
 
 .overlay {
@@ -241,10 +241,6 @@
   font-weight: bold;
 }
 
-.listRows {
-  margin-bottom: 0.5em;
-}
-
 .listRows th {
   font-size: 10px;
   text-transform: uppercase;
@@ -278,6 +274,11 @@
   width: 1em;
   height: 1em;
   background-size: cover;
+}
+
+.like,
+.unlike {
+  text-align: center;
 }
 
 .like svg,
@@ -362,7 +363,7 @@
 
 .espectro__footer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 0.5em;
   font-family: 'Roboto Condensed', 'Roboto', sans-serif;
   font-weight: 300;
@@ -391,7 +392,7 @@
 
 .list__blocks li {
   display: inline-block;
-  margin: 0.25em 6em 0.25em 0;
+  margin: 0.25em 1em 0.25em 0;
 }
 
 .list__blocks li::before {

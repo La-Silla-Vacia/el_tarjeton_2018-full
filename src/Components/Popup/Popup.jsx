@@ -112,7 +112,7 @@ export default class Popup extends Component {
               {comoVota.map((pos, i) => {
                 return (
                   <tr key={i}>
-                    <td width={500}>{pos.title}</td>
+                    <td width={500} height={50}>{pos.title}</td>
                     {(pos.value !== 'Sí' && pos.value !== 'No') ?
                       <td colSpan={2}><span className={s.error}>{pos.value}</span></td>
                       : <React.Fragment>
@@ -133,12 +133,15 @@ export default class Popup extends Component {
             <h4>Proyectos bandera</h4>
             {!banderas.filter((item) => {
               if (item) return true;
-            }).length ? <div dangerouslySetInnerHTML={{ __html: '<em>No tiene banderas claras</em>' }} /> : undefined}
-            <ul className={cN(s.list, s.list__blocks)}>
-              {banderas.map((bandera) => {
-                <li key={bandera}>{bandera}</li>
-              })}
-            </ul>
+            }).length ? <div dangerouslySetInnerHTML={{ __html: '<em>No tiene banderas claras</em>' }} /> :
+              (<ul className={cN(s.list, s.list__blocks)}>
+                {banderas.map((bandera) => {
+                    if (bandera)
+                      return <li key={bandera}>{bandera}</li>
+                  }
+                )}
+              </ul>)
+            }
           </div>
 
           <footer className={s.section}>
@@ -146,11 +149,8 @@ export default class Popup extends Component {
             {enQueEleccionSacoLosVotosMasRecientes && (enQueEleccionSacoLosVotosMasRecientes !== 'No aplica') ?
               <div className={s.espectro__footer}>
                 <div className={s.espectro__footer__item}>
-                  {enQueEleccionSacoLosVotosMasRecientes.substring(enQueEleccionSacoLosVotosMasRecientes.lastIndexOf(" ") + 1, enQueEleccionSacoLosVotosMasRecientes.length)}<br />
+                  {enQueEleccionSacoLosVotosMasRecientes}<br />
                   <span>AÑO</span>
-                </div>
-                <div className={s.espectro__footer__item}>
-                  {enQueEleccionSacoLosVotosMasRecientes.substring(0, enQueEleccionSacoLosVotosMasRecientes.lastIndexOf(" ") + 1)}<br />
                 </div>
                 <div className={s.espectro__footer__item}>
                   {votosMasRecientes || 'Sin definir'}<br />
