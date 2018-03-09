@@ -1,5 +1,4 @@
 .root {
-  margin-bottom: 1em;
   position: relative;
 }
 
@@ -14,9 +13,9 @@
 .header {
   color: #898d90;
   display: flex;
-  align-items: flex-end;
   flex-wrap: wrap;
   min-height: 3em;
+  align-items: center;
 }
 
 .grid,
@@ -205,6 +204,18 @@
   justify-self: flex-end;
   margin-left: auto;
   display: flex;
+  margin-right: 0.5em;
+}
+
+.searchForm {
+  width: 15em;
+  overflow: hidden;
+  display: flex;
+  transition: width .3s ease;
+
+  input {
+    border: 1px solid #ccc;
+  }
 }
 
 .searchButton {
@@ -221,5 +232,5 @@
 }
 
 .hidden {
-  display: none;
+  width: 0;
 }

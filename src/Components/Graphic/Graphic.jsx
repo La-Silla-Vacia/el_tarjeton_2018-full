@@ -119,7 +119,8 @@ export default class Graphic extends Component {
   }
 
   filterItems (filter, nameFilter) {
-    const name_filter = nameFilter || this.state.nameFilter;
+    let name_filter = nameFilter || this.state.nameFilter;
+    if (name_filter === 999) name_filter = null;
     const items = this.items.map((item) => {
       item.hidden = false;
 
@@ -153,7 +154,13 @@ export default class Graphic extends Component {
       return item;
     });
 
-    this.setState({ items: items.clean(undefined), filter, availableItems: items.clean(undefined).length });
+    this.setState({
+      items: items.clean(undefined),
+      filter,
+      availableItems:
+      items.clean(undefined).length,
+      nameFilter
+    });
   }
 
   handleFilterUpdate = newFilters => {
@@ -161,8 +168,8 @@ export default class Graphic extends Component {
   };
 
   handleNameUpdate = newName => {
-    this.setState({ nameFilter: newName });
-    this.filterItems(this.state.filter, newName);
+    const val = newName || 999;
+    this.filterItems(this.state.filter, val);
   };
 
   handleCameraChange = (column, which) => {
@@ -223,8 +230,14 @@ export default class Graphic extends Component {
     return (
       <div className={s.root}>
         <header className={s.buttons}>
-          <h4 className="titulo-flujos" style={{ margin: '0 0 1.5em' }}>EL TARJETÓN<br />
-            ELECTORAL</h4>
+        </header>
+        <Filters
+          data={data}
+          filter={this.state.filter}
+          onFilterUpdate={this.handleFilterUpdate}
+          onNameUpdate={this.handleNameUpdate}
+          onReset={this.handleReset}
+        >
           <div>
             <button className={cN(s.btn, { [s.btnActive]: !camara })}
                     onClick={this.handleCameraChange.bind(false, 'camara', null)}>
@@ -239,14 +252,7 @@ export default class Graphic extends Component {
               Cámara
             </button>
           </div>
-        </header>
-        <Filters
-          data={data}
-          filter={this.state.filter}
-          onFilterUpdate={this.handleFilterUpdate}
-          onNameUpdate={this.handleNameUpdate}
-          onReset={this.handleReset}
-        />
+        </Filters>
 
         <div className={s.inner}>
           <svg className={s.items} width={this.numberOfColumns * this.size}

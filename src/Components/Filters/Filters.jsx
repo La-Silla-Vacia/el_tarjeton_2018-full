@@ -159,7 +159,7 @@ export default class Filters extends Component {
 
   handleFormInput = event => {
     event.preventDefault();
-    const val = this.$input.value;
+    const val = this.$input.value || null;
     if (this.props.onNameUpdate) this.props.onNameUpdate(val);
   };
 
@@ -192,6 +192,7 @@ export default class Filters extends Component {
 
   showInput = () => {
     this.setState({ showInput: !this.state.showInput });
+    if (this.props.onNameUpdate) this.props.onNameUpdate(null);
   };
 
   render () {
@@ -232,11 +233,18 @@ export default class Filters extends Component {
                       d="m85.207 79.375l-21.664-21.668c3.332-4.375 5.207-10 5.207-16.043 0-15-12.082-27.082-27.082-27.082s-27.086 12.086-27.086 27.086 12.082 27.082 27.082 27.082c6.043 0 11.457-1.875 16.043-5.207l21.668 21.668c0.83203 0.83203 1.875 1.25 2.918 1.25s2.082-0.41797 2.918-1.25c1.6641-1.668 1.6641-4.168-0.003907-5.8359zm-43.539-18.957c-10.418 0-18.75-8.332-18.75-18.75s8.332-18.75 18.75-18.75 18.75 8.332 18.75 18.75c0 10.414-8.3359 18.75-18.75 18.75z" />
               </svg>
             </button>
-            <form className={cN({ [s.hidden]: !this.state.showInput })} onSubmit={this.handleFormInput}>
+            <form
+              className={cN(
+                s.searchForm,
+                { [s.hidden]: !this.state.showInput }
+              )}
+              onSubmit={this.handleFormInput}
+            >
               <input type="text" ref={(el) => this.$input = el} className={s.searchInput} />
               <input className={s.searchSubmit} type="submit" value="Buscar" />
             </form>
           </div>
+          {this.props.children}
         </header>
 
         {open ?
