@@ -296,6 +296,7 @@
 .error {
   font-size: .8em;
   font-style: italic;
+  color: #c1c1c1;
 }
 
 .outgoingLink {
