@@ -12,6 +12,10 @@
   cursor: default;
 }
 
+.halfActive {
+  opacity: .65;
+}
+
 .inner {
   height: 1.25em;
   opacity: .5;

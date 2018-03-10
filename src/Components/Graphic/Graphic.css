@@ -84,6 +84,7 @@
   transition: .200s;
   pointer-events: none;
   min-width: 15em;
+  max-width: 20em;
 }
 
 .mounted {
@@ -123,6 +124,7 @@
 
 .name span {
   font-size: 13px;
+  line-height: 1.2;
 }
 
 .izqDer {
@@ -213,4 +215,9 @@
   font-size: 10px !important;
   margin: 0.5em 0 0 1em;
   line-height: 1;
+}
+
+.label {
+  color: map(colors, primary, base);
+  font-weight: bold;
 }

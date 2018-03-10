@@ -14,13 +14,12 @@ export default class Popup extends Component {
 
     this.state = {
       open: false,
-      mounted: false
     }
   }
 
   componentDidMount () {
     setTimeout(() => {
-      this.setState({ mounted: true });
+      this.$el.classList.add(s.mounted);
     }, 30);
 
     window.addEventListener('keydown', this.handleKeyPress);
@@ -30,22 +29,28 @@ export default class Popup extends Component {
     window.removeEventListener('keydown', this.handleKeyPress);
   }
 
+  shouldComponentUpdate(newProps, newState) {
+    if (this.state.open !== newState.open) return true;
+    return false;
+  }
+
   handleKeyPress = ({ key }) => {
     if (key === 'Escape') this.handleClose();
   };
 
   handleClose = () => {
-    this.setState({ mounted: false });
+    this.$el.classList.remove(s.mounted);
     setTimeout(() => {
       this.props.close();
     }, 430);
   };
 
   render () {
-    const { open, mounted } = this.state;
+    const { open } = this.state;
     const { name, camara, partido, foto, votosMasRecientes, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100, banderas, comoVota } = this.props;
+    console.log('Popup render');
     return (
-      <div className={cN(s.root, { [s.mounted]: mounted })}>
+      <div ref={el => this.$el = el} className={s.root}>
         <div className={s.overlay} onClick={this.handleClose} />
         <div className={cN(s.inner, s.borderTop)}>
           <div className={s.intro}>

@@ -4,7 +4,7 @@ import cN from 'classnames';
 import s from './Row.css';
 
 export default class Row extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -17,7 +17,24 @@ export default class Row extends Component {
     this.enterTimeout = null;
   }
 
-  componentWillMount() {
+  shouldComponentUpdate (newProps, newState) {
+    if (this.props.hidden !== newProps.hidden) {
+      const realHidden = (typeof newProps.hidden === 'boolean');
+      // console.log(realHidden);
+      if (realHidden && newProps.hidden) {
+        this.$el.classList.add(s.inActive);
+      } else if (newProps.hidden) {
+        this.$el.classList.add(s.halfActive);
+      } else {
+        this.$el.classList.remove(s.inActive);
+      }
+      // return true;
+    }
+
+    return false;
+  }
+
+  componentWillMount () {
     const { posicionIz_der1A100 } = this.props;
     const scale = (posicionIz_der1A100 && typeof posicionIz_der1A100 !== 'string') ? posicionIz_der1A100 : 50;
     const grey = 255 - Math.round(scale * 2.55);
@@ -42,13 +59,15 @@ export default class Row extends Component {
     this.props.hideName();
   };
 
-  render() {
+  render () {
     const { name, partido, foto, hidden, x, y, onClick } = this.props;
+
     return (
       <g
         className={cN(s.root, { [s.inActive]: hidden })}
+        ref={(el) => this.$el = el}
         transform={`translate(${x}, ${y})`}
-        style={{transitionDelay: `${this.transitionDelay}s`}}
+        style={{ transitionDelay: `${this.transitionDelay}s` }}
         xlinkTitle={name}
         onClick={hidden ? undefined : onClick}
         onMouseEnter={hidden ? undefined : this.handleMouseEnter}

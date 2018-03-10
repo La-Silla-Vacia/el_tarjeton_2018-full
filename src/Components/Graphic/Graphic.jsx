@@ -119,6 +119,7 @@ export default class Graphic extends Component {
   }
 
   filterItems (filter, nameFilter) {
+    const elected = window.tarjetones_2018_data.elected;
     let name_filter = nameFilter || this.state.nameFilter;
     if (name_filter === 999) name_filter = null;
     const items = this.items.map((item) => {
@@ -151,6 +152,16 @@ export default class Graphic extends Component {
       if (name_filter) {
         if (item.name.toLowerCase().indexOf(name_filter) === -1) item.hidden = true;
       }
+
+      if (elected && this.electo) {
+        if (item.electo === 'Elegido') {
+          item.hidden = false;
+        } else if (item.electo === 'Purgatorio') {
+          item.hidden = 1
+        } else {
+          item.hidden = true;
+        }
+      }
       return item;
     });
 
@@ -176,19 +187,25 @@ export default class Graphic extends Component {
     const filter = this.state.filter;
     let found = false;
 
-    for (let i = 0; i < filter.length; i += 1) {
-      const filterItem = filter[i];
-      if (filterItem.column === column) {
-        found = true;
-        filterItem.which = which;
-      }
-    }
+    if (which === 'Elegido') {
+      this.electo = true;
+    } else {
+      this.electo = false;
 
-    if (!found) {
-      filter.push({
-        column: column,
-        which: which
-      });
+      for (let i = 0; i < filter.length; i += 1) {
+        const filterItem = filter[i];
+        if (filterItem.column === column) {
+          found = true;
+          filterItem.which = which;
+        }
+      }
+
+      if (!found) {
+        filter.push({
+          column: column,
+          which: which
+        });
+      }
     }
     if (column === "camara") this.setState({ camara: which });
     this.filterItems(filter);
@@ -196,10 +213,12 @@ export default class Graphic extends Component {
 
   handlePersonClick = index => {
     if (this.state.popupOpen) return;
+    document.querySelector('body').style.overflow = 'hidden';
     this.setState({ popupOpen: true, popupItem: index });
   };
 
   handleClosePopup = () => {
+    document.querySelector('body').style.overflow = 'auto';
     this.setState({ popupOpen: false });
   };
 
@@ -207,13 +226,13 @@ export default class Graphic extends Component {
     if (this.state.nameOpen && this.state.nameItem === index) return;
     this.setState({ nameOpen: true, nameItem: index });
     setTimeout(() => {
-      this.setState({ nameMounted: true })
+      this.$namePopup.classList.add(s.mounted);
     }, 30)
   };
 
   handleHideName = () => {
     if (!this.state.nameOpen) return;
-    this.setState({ nameMounted: false });
+    this.$namePopup.classList.remove(s.mounted);
     setTimeout(() => {
       this.setState({ nameOpen: false });
     }, 200)
@@ -224,7 +243,7 @@ export default class Graphic extends Component {
   };
 
   render () {
-    const { camara, popupOpen, popupItem, nameOpen, nameItem, nameMounted } = this.state;
+    const { camara, popupOpen, popupItem, nameOpen, nameItem } = this.state;
     const { data } = this.props;
     const people = this.getPeople();
     return (
@@ -249,6 +268,12 @@ export default class Graphic extends Component {
                     onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
               Cámara
             </button>
+            {window.tarjetones_2018_data.elected ?
+              <button className={cN(s.btn, { [s.btnActive]: camara === 'Elegido' })}
+                      onClick={this.handleCameraChange.bind(false, 'camara', 'Elegido')}>
+                Elegido
+              </button>
+              : undefined}
           </div>
         </Filters>
 
@@ -259,12 +284,18 @@ export default class Graphic extends Component {
           </svg>
 
           {nameOpen ?
-            <div className={cN(s.name, { [s.mounted]: nameMounted })}
-                 style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}>
+            <div
+              ref={el => this.$namePopup = el}
+              className={s.name}
+              style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}
+            >
               <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
               <div className={s.nameBox}>
                 <h4>{this.items[nameItem].name}</h4>
                 <span>{this.items[nameItem].partido}</span>
+                {camara === 'Elegido' ?
+                  <span className={s.label}> - {this.items[nameItem].electo}</span>
+                  : undefined}
               </div>
             </div>
 
