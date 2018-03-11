@@ -51,15 +51,22 @@ export default class Graphic extends Component {
 
   setPositions = () => {
     const { width } = this.props;
+    const items = this.items.filter((item) => {
+      if (this.electo) {
+        if (item.electo) return true
+      } else {
+        return true;
+      }
+    }).clean(undefined)
     this.numberOfColumns = Math.round(width / 25);
-    this.numberOfRows = Math.round(this.items.length / (this.numberOfColumns - 1));
+    this.numberOfRows = Math.round(items.length / (this.numberOfColumns - 1));
     this.size = 25;
     let x = 0, y = -this.size;
     let rowIndex = -1;
 
     let currentStage = 0;
     this.stageSizes = [];
-    this.items = this.items.map((item) => {
+    this.itemsWithPosition = items.map((item) => {
       if ((item.posicionIz_der1A100 >= 33 && currentStage < 33) || item.posicionIz_der1A100 >= 66 && currentStage < 66) {
         y = -this.size;
         x += this.size + (this.size / 2);
@@ -122,7 +129,7 @@ export default class Graphic extends Component {
     const elected = window.tarjetones_2018_data.elected;
     let name_filter = nameFilter || this.state.nameFilter;
     if (name_filter === 999) name_filter = null;
-    const items = this.items.map((item) => {
+    const items = this.itemsWithPosition.map((item) => {
       item.hidden = false;
 
       for (let j = 0; j < filter.length; j += 1) {
@@ -207,6 +214,7 @@ export default class Graphic extends Component {
         });
       }
     }
+    this.setPositions();
     if (column === "camara") this.setState({ camara: which });
     this.filterItems(filter);
   };
@@ -287,14 +295,14 @@ export default class Graphic extends Component {
             <div
               ref={el => this.$namePopup = el}
               className={s.name}
-              style={{ top: `${this.items[nameItem].y}px`, left: `${this.items[nameItem].x}px` }}
+              style={{ top: `${this.itemsWithPosition[nameItem].y}px`, left: `${this.itemsWithPosition[nameItem].x}px` }}
             >
-              <div className={s.photo} style={{ backgroundImage: `url(${this.items[nameItem].foto})` }} />
+              <div className={s.photo} style={{ backgroundImage: `url(${this.itemsWithPosition[nameItem].foto})` }} />
               <div className={s.nameBox}>
-                <h4>{this.items[nameItem].name}</h4>
-                <span>{this.items[nameItem].partido}</span>
+                <h4>{this.itemsWithPosition[nameItem].name}</h4>
+                <span>{this.itemsWithPosition[nameItem].partido}</span>
                 {camara === 'Elegido' ?
-                  <span className={s.label}> - {this.items[nameItem].electo}</span>
+                  <span className={s.label}> - {this.itemsWithPosition[nameItem].electo}</span>
                   : undefined}
               </div>
             </div>

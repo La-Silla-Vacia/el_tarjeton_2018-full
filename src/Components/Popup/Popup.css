@@ -382,6 +382,10 @@
   text-align: right;
 }
 
+.espectro__header {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .espectro__footer__item,
 .list__blocks li {
   background-color: #EAEFF0;

@@ -96,7 +96,7 @@ export default class Popup extends Component {
               })}
             </div>
             <div className={s.espectro__line}><span /><span /><span /></div>
-            <footer className={s.espectro__footer}>
+            <footer className={cN(s.espectro__footer, s.espectro__header)}>
               <span>IZQUIERDA</span>
               <span>CENTRO</span>
               <span>DERECHA</span>
