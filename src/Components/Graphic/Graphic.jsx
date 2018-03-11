@@ -52,7 +52,7 @@ export default class Graphic extends Component {
   setPositions = () => {
     const { width } = this.props;
     const items = this.items.filter((item) => {
-      if (this.electo) {
+      if (window.tarjetones_2018_data.elected) {
         if (item.electo) return true
       } else {
         return true;
@@ -276,12 +276,12 @@ export default class Graphic extends Component {
                     onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
               Cámara
             </button>
-            {window.tarjetones_2018_data.elected ?
-              <button className={cN(s.btn, { [s.btnActive]: camara === 'Elegido' })}
-                      onClick={this.handleCameraChange.bind(false, 'camara', 'Elegido')}>
-                Elegido
-              </button>
-              : undefined}
+            {/*{window.tarjetones_2018_data.elected ?*/}
+              {/*<button className={cN(s.btn, { [s.btnActive]: camara === 'Elegido' })}*/}
+                      {/*onClick={this.handleCameraChange.bind(false, 'camara', 'Elegido')}>*/}
+                {/*Elegido*/}
+              {/*</button>*/}
+              {/*: undefined}*/}
           </div>
         </Filters>
 
@@ -301,7 +301,7 @@ export default class Graphic extends Component {
               <div className={s.nameBox}>
                 <h4>{this.itemsWithPosition[nameItem].name}</h4>
                 <span>{this.itemsWithPosition[nameItem].partido}</span>
-                {camara === 'Elegido' ?
+                {window.tarjetones_2018_data.elected ?
                   <span className={s.label}> - {this.itemsWithPosition[nameItem].electo}</span>
                   : undefined}
               </div>

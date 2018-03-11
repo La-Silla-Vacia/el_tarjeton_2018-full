@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import cN from 'classnames';
-import showdown from 'showdown';
+import React, { Component } from 'react'
+import cN from 'classnames'
+import showdown from 'showdown'
 
-const converter = new showdown.Converter();
-import s from './Popup.css';
+const converter = new showdown.Converter()
+import s from './Popup.css'
 
-import like from './icons/like.svg';
-import unlike from './icons/unlike.svg';
+import like from './icons/like.svg'
+import unlike from './icons/unlike.svg'
 
 export default class Popup extends Component {
   constructor (props) {
-    super(props);
+    super(props)
 
     this.state = {
       open: false,
@@ -19,36 +19,35 @@ export default class Popup extends Component {
 
   componentDidMount () {
     setTimeout(() => {
-      this.$el.classList.add(s.mounted);
-    }, 30);
+      this.$el.classList.add(s.mounted)
+    }, 30)
 
-    window.addEventListener('keydown', this.handleKeyPress);
+    window.addEventListener('keydown', this.handleKeyPress)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('keydown', this.handleKeyPress);
+    window.removeEventListener('keydown', this.handleKeyPress)
   }
 
-  shouldComponentUpdate(newProps, newState) {
-    if (this.state.open !== newState.open) return true;
-    return false;
+  shouldComponentUpdate (newProps, newState) {
+    if (this.state.open !== newState.open) return true
+    return false
   }
 
   handleKeyPress = ({ key }) => {
-    if (key === 'Escape') this.handleClose();
-  };
+    if (key === 'Escape') this.handleClose()
+  }
 
   handleClose = () => {
-    this.$el.classList.remove(s.mounted);
+    this.$el.classList.remove(s.mounted)
     setTimeout(() => {
-      this.props.close();
-    }, 430);
-  };
+      this.props.close()
+    }, 430)
+  }
 
   render () {
-    const { open } = this.state;
-    const { name, camara, partido, foto, votosMasRecientes, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100, banderas, comoVota } = this.props;
-    console.log('Popup render');
+    const { open } = this.state
+    const { name, camara, partido, foto, votosMasRecientes, enQueEleccionSacoLosVotosMasRecientes, perfilito, departamento, posicionIz_der1A100, banderas, comoVota, numeroEnElTarjeton } = this.props
     return (
       <div ref={el => this.$el = el} className={s.root}>
         <div className={s.overlay} onClick={this.handleClose} />
@@ -72,6 +71,12 @@ export default class Popup extends Component {
                 </button>
               </div>
             </div>
+            {numeroEnElTarjeton ?
+              <div className={s.number}>
+                <span>{numeroEnElTarjeton}</span>
+                <div>EN EL TARJÉTON</div>
+              </div>
+              : undefined}
           </div>
 
 
@@ -92,7 +97,7 @@ export default class Popup extends Component {
                       }
                     )}
                   />
-                );
+                )
               })}
             </div>
             <div className={s.espectro__line}><span /><span /><span /></div>
@@ -137,7 +142,7 @@ export default class Popup extends Component {
           <div className={s.section}>
             <h4>Proyectos bandera</h4>
             {!banderas.filter((item) => {
-              if (item) return true;
+              if (item) return true
             }).length ? <div dangerouslySetInnerHTML={{ __html: '<em>No tiene banderas claras</em>' }} /> :
               (<ul className={cN(s.list, s.list__blocks)}>
                 {banderas.map((bandera) => {
@@ -172,6 +177,6 @@ export default class Popup extends Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
