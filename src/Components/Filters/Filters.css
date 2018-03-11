@@ -216,6 +216,7 @@
 
 .searchForm input {
   border: 1px solid #ccc;
+  max-width: 170px;
 }
 
 .searchButton {
@@ -232,5 +233,6 @@
 }
 
 .hidden {
-  width: 0;
+  width: 1px;
+  opacity: 0;
 }
