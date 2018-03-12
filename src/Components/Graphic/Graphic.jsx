@@ -58,9 +58,9 @@ export default class Graphic extends Component {
         return true;
       }
     }).clean(undefined)
-    this.numberOfColumns = Math.round(width / 25);
+    this.numberOfColumns = Math.round(width / 45);
     this.numberOfRows = Math.round(items.length / (this.numberOfColumns - 1));
-    this.size = 25;
+    this.size = 45;
     let x = 0, y = -this.size;
     let rowIndex = -1;
 
@@ -311,7 +311,7 @@ export default class Graphic extends Component {
         </div>
 
         {popupOpen ?
-          <Popup {...data[popupItem]} close={this.handleClosePopup} />
+          <Popup {...this.itemsWithPosition[popupItem]} close={this.handleClosePopup} />
           : undefined}
 
         <div className={s.izqDer} style={{ width: `${(this.numberOfColumns - 1) * this.size}px` }}>

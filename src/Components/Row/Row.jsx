@@ -76,9 +76,9 @@ export default class Row extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         {(foto) ?
-          <image xlinkHref={`${foto}`} x={0} y={0} height={20} width={20} />
+          <image xlinkHref={`${foto}`} x={0} y={0} height={40} width={40} />
           : false}
-        <rect className={s.color} width={20} height={20} x={0} y={0} data-partido={partido} />
+        <rect className={s.color} width={40} height={40} x={0} y={0} data-partido={partido} />
       </g>
     )
   }
