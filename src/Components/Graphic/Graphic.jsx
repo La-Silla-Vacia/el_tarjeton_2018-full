@@ -257,7 +257,7 @@ export default class Graphic extends Component {
     return (
       <div className={s.root}>
         <Filters
-          data={data}
+          data={this.itemsWithPosition}
           filter={this.state.filter}
           onFilterUpdate={this.handleFilterUpdate}
           onNameUpdate={this.handleNameUpdate}
