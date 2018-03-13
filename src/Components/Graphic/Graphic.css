@@ -186,7 +186,7 @@
 }
 
 .credits {
-  width: 24em;
+  width: 18em;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -203,12 +203,17 @@
 }
 
 .credits > div:first-child {
-  padding-top: 1em;
+  padding-top: 0.5em;
+  text-align: left;
 }
 
 .credits > div:last-child {
   width: 55%;
   border-left: 1px solid #C1C1C1;
+}
+
+.credits span {
+  font-size: 12px;
 }
 
 .credits p {

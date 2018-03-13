@@ -252,7 +252,6 @@ export default class Graphic extends Component {
 
   render () {
     const { camara, popupOpen, popupItem, nameOpen, nameItem } = this.state;
-    const { data } = this.props;
     const people = this.getPeople();
     return (
       <div className={s.root}>
@@ -276,12 +275,6 @@ export default class Graphic extends Component {
                     onClick={this.handleCameraChange.bind(false, 'camara', 'Cámara')}>
               Cámara
             </button>
-            {/*{window.tarjetones_2018_data.elected ?*/}
-              {/*<button className={cN(s.btn, { [s.btnActive]: camara === 'Elegido' })}*/}
-                      {/*onClick={this.handleCameraChange.bind(false, 'camara', 'Elegido')}>*/}
-                {/*Elegido*/}
-              {/*</button>*/}
-              {/*: undefined}*/}
           </div>
         </Filters>
 
@@ -336,6 +329,7 @@ export default class Graphic extends Component {
           </ul>
           <div className={s.credits}>
             <div>
+              <span>Diseño</span>
               <img src="http://bestiario.org/themes/default/bestiario_logo.svg" alt="Bestiario" />
             </div>
             <div>
