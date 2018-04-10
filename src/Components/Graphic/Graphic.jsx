@@ -66,6 +66,7 @@ export default class Graphic extends Component {
 
     let currentStage = 0;
     this.stageSizes = [];
+    console.log(items)
     this.itemsWithPosition = items.map((item) => {
       if ((item.posicionIz_der1A100 >= 33 && currentStage < 33) || item.posicionIz_der1A100 >= 66 && currentStage < 66) {
         y = -this.size;
@@ -108,7 +109,6 @@ export default class Graphic extends Component {
   getPeople () {
     // Get the data from the attribute
     const { items } = this.state;
-
     // Loop through the data
     return items
       .map((item, index) => {
@@ -128,10 +128,10 @@ export default class Graphic extends Component {
   filterItems (filter, nameFilter) {
     const elected = window.tarjetones_2018_data.elected;
     let name_filter = nameFilter || this.state.nameFilter;
+
     if (name_filter === 999) name_filter = null;
     const items = this.itemsWithPosition.map((item) => {
       item.hidden = false;
-
       for (let j = 0; j < filter.length; j += 1) {
         const filterItem = filter[j];
         if (!filterItem) continue;
@@ -327,18 +327,6 @@ export default class Graphic extends Component {
               );
             })}
           </ul>
-          <div className={s.credits}>
-            <div>
-              <span>Diseño</span>
-              <img src="http://bestiario.org/themes/default/bestiario_logo.svg" alt="Bestiario" />
-            </div>
-            <div>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
-              <p>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una
-                posición institucional
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     )
