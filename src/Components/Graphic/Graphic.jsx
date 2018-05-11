@@ -51,16 +51,10 @@ export default class Graphic extends Component {
 
   setPositions = () => {
     const { width } = this.props;
-    const items = this.items.filter((item) => {
-      if (window.tarjetones_2018_data.elected) {
-        if (item.electo) return true
-      } else {
-        return true;
-      }
-    }).clean(undefined)
-    this.numberOfColumns = Math.round(width / 45);
+    const items = this.items
+    this.numberOfColumns = Math.round(width / 25);
     this.numberOfRows = Math.round(items.length / (this.numberOfColumns - 1));
-    this.size = 45;
+    this.size = 25;
     let x = 0, y = -this.size;
     let rowIndex = -1;
 
@@ -327,6 +321,19 @@ export default class Graphic extends Component {
               );
             })}
           </ul>
+
+          <div className={s.credits}>
+            <div>
+              <span>Diseño</span>
+              <img src="http://bestiario.org/themes/default/bestiario_logo.svg" alt="Bestiario" />
+            </div>
+            <div>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Logo_Bancolombia.svg" alt="Bancolombia" />
+              <p>apoyó esta herramienta educativa para que los ciudadanos voten informados. Ésta no representa una
+                posición institucional
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     )

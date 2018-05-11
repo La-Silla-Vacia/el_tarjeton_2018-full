@@ -70,7 +70,7 @@ window.tarjetones_2018_data = {
 <img src="https://raw.githubusercontent.com/la-silla-vacia/lsv-interactive/master/misc/lsvi-loading.gif"
      alt="Interactive is loading" style="width:100%;max-width: 320px;margin: 4em auto;display: block;">
 </div>
-<script defer type="text/javascript" src="https://la-silla-vacia.github.io/tarjetones_2018/script.js"></script>
+<script defer type="text/javascript" src="https://la-silla-vacia.github.io/el_tarjeton_2018__complete/script.js"></script>
 <!-- END OF OUR INTERACTIE -->
 ```
 
